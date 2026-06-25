@@ -242,6 +242,10 @@
     border-color: var(--focus);
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--focus) 22%, transparent);
   }
+  /* На мобильных шрифт полей 16px — иначе iOS Safari авто-зумит при фокусе */
+  @media (max-width: 640px) {
+    input[type="text"], input[type="email"], input[type="number"], textarea { font-size: 16px; }
+  }
 
   /* ---------- Validation ---------- */
   .invalid {
