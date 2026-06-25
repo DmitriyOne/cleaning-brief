@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бриф на сайт — клининговый сервис (Вьетнам)</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
+<style>
+  :root {
+    /* Cool Blue 2026 — OKLCH, прохладные нейтрали + архитектурный синий-анкор (тренд 2026) */
+    --bg:        oklch(0.962 0.008 240);
+    --surface:   oklch(0.986 0.005 240);
+    --surface-2: oklch(0.952 0.010 240);
+    --ink:       oklch(0.270 0.026 252);
+    --ink-soft:  oklch(0.460 0.026 250);
+    --ink-faint: oklch(0.600 0.022 248);
+    --accent:    oklch(0.475 0.115 250);
+    --accent-deep: oklch(0.400 0.100 252);
+    --sand:      oklch(0.820 0.045 235);
+    --line:      oklch(0.890 0.012 240);
+    --line-soft: oklch(0.930 0.009 240);
+    --focus:     oklch(0.580 0.125 248);
+    --req:       oklch(0.580 0.180 22);
+    --radius: 12px;
+    --maxw: 50rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ---------- Header ---------- */
+  header.top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in oklch, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: saturate(1.1) blur(6px);
+    backdrop-filter: saturate(1.1) blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brandmark {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+  .brandmark svg { display: block; }
+  .brandmark .sub {
+    font-weight: 450;
+    color: var(--ink-faint);
+    font-size: 0.82rem;
+  }
+  .actions { display: flex; gap: 0.5rem; }
+  button.btn {
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 550;
+    color: var(--surface);
+    background: var(--accent);
+    border: none;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 180ms cubic-bezier(0.22,1,0.36,1), transform 120ms;
+  }
+  button.btn:hover { background: var(--accent-deep); }
+  button.btn:active { transform: translateY(1px); }
+  button.btn.ghost {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  button.btn.ghost:hover { background: color-mix(in oklch, var(--accent) 8%, transparent); }
+
+  /* ---------- Layout ---------- */
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .hero {
+    margin-bottom: 2.75rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.6rem;
+    font-weight: 680;
+  }
+  .hero .lead {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 44ch;
+    margin: 0 0 1.4rem;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chip {
+    font-size: 0.8rem;
+    color: var(--accent-deep);
+    background: color-mix(in oklch, var(--accent) 10%, var(--surface));
+    border: 1px solid color-mix(in oklch, var(--accent) 22%, transparent);
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+
+  .note {
+    background: var(--surface-2);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 1rem 1.15rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin: 1.6rem 0 0;
+  }
+  .note strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Sections ---------- */
+  html { scroll-padding-top: 5rem; }
+  section.block {
+    margin-top: 2.75rem;
+    scroll-margin-top: 5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.75rem 1.75rem 1.9rem;
+  }
+  section.block > h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.4rem;
+    letter-spacing: -0.015em;
+    margin: 0 0 1.15rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--line);
+    font-weight: 690;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+    color: var(--surface);
+    background: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 650;
+    border-radius: 7px;
+    padding: 0.12rem 0.5rem;
+    line-height: 1.5;
+  }
+  .block-hint {
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+    margin: -0.25rem 0 1.4rem;
+    max-width: 60ch;
+  }
+
+  fieldset {
+    border: none;
+    margin: 1.9rem 0 0;
+    padding: 1.4rem 0 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  section.block > h2 + fieldset,
+  section.block > .block-hint + fieldset {
+    margin-top: 0.2rem;
+    padding-top: 0;
+    border-top: none;
+  }
+  legend {
+    padding: 0;
+    font-weight: 640;
+    font-size: 0.82rem;
+    color: var(--accent-deep);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .field { margin-bottom: 1.15rem; }
+  .field:last-child { margin-bottom: 0; }
+  label.lbl {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 520;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+  .hint {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin: 0.15rem 0 0.5rem;
+    font-weight: 400;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 0.6rem 0.75rem;
+    transition: border-color 150ms, box-shadow 150ms, background 150ms;
+  }
+  textarea { resize: vertical; min-height: 3.2rem; line-height: 1.55; }
+  input::placeholder, textarea::placeholder { color: var(--ink-faint); opacity: 0.7; }
+  input:focus, textarea:focus {
+    outline: none;
+    background: var(--surface);
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--focus) 22%, transparent);
+  }
+
+  /* ---------- Validation ---------- */
+  .invalid {
+    border-color: var(--req) !important;
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--req) 18%, transparent) !important;
+  }
+  .opts.invalid-group,
+  .palette.invalid-group {
+    border: 1px solid color-mix(in oklch, var(--req) 50%, transparent);
+    background: color-mix(in oklch, var(--req) 5%, transparent);
+    border-radius: 12px;
+    padding: 0.7rem;
+  }
+  .group-error {
+    color: var(--req);
+    font-size: 0.85rem;
+    font-weight: 560;
+    margin-top: 0.5rem;
+  }
+  button.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* checkbox / radio lists */
+  .opts { display: grid; gap: 0.45rem; }
+  .opts.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 560px) { .opts.cols-2 { grid-template-columns: 1fr; } }
+
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--line-soft);
+    border-radius: 9px;
+    cursor: pointer;
+    background: var(--surface);
+    transition: border-color 140ms, background 140ms;
+    font-size: 0.92rem;
+  }
+  .opt:hover { border-color: var(--sand); background: var(--surface-2); }
+  .opt input { margin: 0.18rem 0 0; accent-color: var(--accent); width: 1.05rem; height: 1.05rem; flex: none; }
+  .opt:has(input:checked) {
+    border-color: var(--accent);
+    background: color-mix(in oklch, var(--accent) 7%, var(--surface));
+  }
+  .req { color: var(--req); font-weight: 700; margin-left: 0.12rem; }
+  .opt .o-hint { display:block; color: var(--ink-faint); font-size: 0.8rem; font-style: italic; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* palette cards — большие образцы сверху, подпись снизу */
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); gap: 0.85rem; }
+  .pal {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+    transition: border-color 150ms, box-shadow 150ms, transform 120ms cubic-bezier(0.22,1,0.36,1);
+  }
+  .pal:hover { border-color: var(--sand); transform: translateY(-2px); }
+  .pal:has(input:checked) {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in oklch, var(--accent) 35%, transparent);
+  }
+  .pal input { display: none; }
+  .swatches { display: flex; gap: 0; height: 4rem; }
+  .swatches span { flex: 1; height: 100%; display: block; }
+  .pal > div:not(.swatches) { padding: 0.65rem 0.85rem 0.8rem; }
+  .pal .p-title { font-weight: 620; font-size: 0.92rem; }
+  .pal .p-desc { font-size: 0.76rem; color: var(--ink-faint); font-weight: 400; }
+  .pal .p-hex { font-size: 0.7rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; margin-top: 0.25rem; }
+
+  .trend {
+    margin: 0 0 1.1rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    background: color-mix(in oklch, var(--sand) 18%, var(--surface));
+    border: 1px solid color-mix(in oklch, var(--sand) 45%, transparent);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    line-height: 1.5;
+  }
+  .trend b { color: var(--ink); }
+  .t-list { margin: 0.55rem 0 0.4rem; padding-left: 0; list-style: none; display: grid; gap: 0.5rem; }
+  .t-list li { padding-left: 0.95rem; position: relative; }
+  .t-list li::before {
+    content: ""; position: absolute; left: 0; top: 0.55em;
+    width: 0.4rem; height: 0.4rem; border-radius: 50%;
+    background: color-mix(in oklch, var(--accent) 55%, var(--sand));
+  }
+
+  footer.foot {
+    max-width: var(--maxw);
+    margin: 3rem auto 0;
+    padding: 1.6rem 1.5rem 3rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+
+  /* ---------- Language switcher ---------- */
+  .langsel { position: relative; }
+  .langbtn {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    font: inherit; font-size: 0.85rem; font-weight: 550;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 0.42rem 0.7rem 0.42rem 0.8rem; cursor: pointer;
+    transition: border-color 150ms, background 150ms;
+  }
+  .langbtn:hover { border-color: var(--accent); }
+  .langbtn .flag { font-size: 1rem; line-height: 1; }
+  .langbtn .caret { font-size: 0.7rem; color: var(--ink-faint); transition: transform 180ms cubic-bezier(0.22,1,0.36,1); }
+  .langsel.open .langbtn .caret { transform: rotate(180deg); }
+  .langmenu {
+    position: absolute; top: calc(100% + 0.4rem); right: 0; z-index: 40;
+    margin: 0; padding: 0.3rem; list-style: none;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; box-shadow: 0 10px 30px -8px color-mix(in oklch, var(--ink) 22%, transparent);
+    min-width: 11rem; opacity: 0; transform: translateY(-6px) scale(0.98);
+    pointer-events: none; transition: opacity 160ms, transform 160ms cubic-bezier(0.22,1,0.36,1);
+  }
+  .langsel.open .langmenu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .langmenu li {
+    display: flex; align-items: center; gap: 0.55rem;
+    padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem;
+    transition: background 120ms;
+  }
+  .langmenu li:hover { background: var(--surface-2); }
+  .langmenu li[aria-selected="true"] { background: color-mix(in oklch, var(--accent) 12%, var(--surface)); font-weight: 600; }
+  .langmenu li .flag { font-size: 1.05rem; }
+  .langmenu li .check { margin-left: auto; color: var(--accent); opacity: 0; }
+  .langmenu li[aria-selected="true"] .check { opacity: 1; }
+  @media print { .langsel { display: none !important; } }
+
+  /* ---------- Print ---------- */
+  @media print {
+    :root { --bg: #fff; }
+    body { background: #fff; font-size: 11pt; }
+    header.top, .actions, footer.foot .hide-print { display: none !important; }
+    main { padding: 0; max-width: 100%; }
+    #submit-note, #thankyou { display: none !important; }
+    section.block { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; margin-top: 1rem; }
+    .note, .trend { break-inside: avoid; }
+    input, textarea { border: 1px solid #bbb; background: #fff; }
+    .opt { border: 1px solid #ddd; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brandmark">
+      <span>Бриф <span class="sub">· клининг · Вьетнам</span></span>
+    </div>
+    <div class="actions">
+      <div class="langsel" id="langsel">
+        <button class="langbtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="flag" data-flag>🇷🇺</span><span class="lname" data-lname>Русский</span><span class="caret">▾</span>
+        </button>
+        <ul class="langmenu" role="listbox">
+          <li role="option" data-lang="ru" aria-selected="true"><span class="flag">🇷🇺</span> Русский <span class="check">✓</span></li>
+          <li role="option" data-lang="en" aria-selected="false"><span class="flag">🇬🇧</span> English <span class="check">✓</span></li>
+          <li role="option" data-lang="vi" aria-selected="false"><span class="flag">🇻🇳</span> Tiếng Việt <span class="check">✓</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<form id="briefForm" novalidate>
+  <div class="hero">
+    <h1>Бриф на сайт<br>клинингового сервиса</h1>
+    <p class="lead">Заполните поля прямо в браузере и нажмите «Отправить бриф» внизу страницы.</p>
+    <div class="meta-row">
+      <span class="chip">Рынок: Вьетнам</span>
+      <span class="chip">Языки сайта: EN + VI</span>
+      <span class="chip">Аудитория: иностранцы · местные · B2B</span>
+    </div>
+    <div class="note">
+      <strong>Как заполнять.</strong> Отметьте подходящие варианты и впишите ответы в поля. Поля со знаком <span class="req">*</span> — обязательные. Подсказки под полями даны курсивом. Когда закончите, нажмите «Отправить бриф» внизу страницы.
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <section class="block" id="s1">
+    <h2><span class="num">01</span> О бизнесе и целях</h2>
+    <fieldset>
+      <legend>Общая информация</legend>
+      <div class="grid-2">
+        <div class="field"><label class="lbl" for="business_name">Название бизнеса <span class="req">*</span></label><input type="text" id="business_name" name="business_name"></div>
+        <div class="field"><label class="lbl" for="main_city">Главный город (где базируетесь) <span class="req">*</span></label><input type="text" id="main_city" name="main_city" placeholder="Дананг / Хошимин / Ханой / Нячанг"></div>
+      </div>
+      <div class="field"><label class="lbl" for="office_address">Адрес основного офиса (район, город) <span class="req">*</span></label><span class="hint">Где физически будет база: район и город. Если офиса пока нет — напишите планируемый район.</span><input type="text" id="office_address" name="office_address" placeholder="Например: район Хайчау, Дананг"></div>
+      <div class="field"><label class="lbl" for="business_description">Краткое описание (1–2 предложения, чем занимаетесь) <span class="req">*</span></label><textarea id="business_description" name="business_description"></textarea></div>
+      <div class="field"><label class="lbl" for="years_experience">Опыт работы (лет / с какого года)</label><input type="text" id="years_experience" name="years_experience"></div>
+      <div class="field">
+        <label class="lbl">Главная цель сайта <span class="req">*</span></label>
+        <div class="opts cols-2">
+          <label class="opt"><input type="radio" id="goal_leads" name="goal" value="Заявки (лиды)"> Заявки (лиды)</label>
+          <label class="opt"><input type="radio" id="goal_trust" name="goal" value="Доверие / имидж"> Доверие / имидж</label>
+          <label class="opt"><input type="radio" id="goal_both" name="goal" value="И то, и другое"> И то, и другое</label>
+          <label class="opt"><input type="radio" id="goal_undecided" name="goal" value="Ещё не решили"> Ещё не решили</label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Цели и KPI сайта <span class="hint" style="display:inline">— чтобы потом понять, работает ли он</span></legend>
+      <div class="grid-2">
+        <div class="field"><label class="lbl" for="kpi_leads_per_month">Заявок в месяц (цель)</label><input type="text" id="kpi_leads_per_month" name="kpi_leads_per_month" placeholder="напр. 30–50"></div>
+        <div class="field"><label class="lbl" for="kpi_target_conversion">Целевая конверсия в заявку</label><input type="text" id="kpi_target_conversion" name="kpi_target_conversion" placeholder="ориентир лендинга 3–7%"></div>
+        <div class="field"><label class="lbl" for="kpi_max_response_time">Макс. время ответа на заявку</label><input type="text" id="kpi_max_response_time" name="kpi_max_response_time" placeholder="напр. до 15 минут"></div>
+        <div class="field"><label class="lbl" for="kpi_avg_order_value">Средний чек / выручка с сайта</label><input type="text" id="kpi_avg_order_value" name="kpi_avg_order_value"></div>
+      </div>
+    </fieldset>
+  </section>
+
+  <!-- 2 -->
+  <section class="block">
+    <h2><span class="num">02</span> Услуги</h2>
+    <p class="block-hint">Отметьте, что предоставляете. <span class="req">*</span> — отметьте хотя бы одну услугу.</p>
+    <div class="opts cols-2" id="services-group">
+      <label class="opt"><input type="checkbox" id="svc_house_apartment" name="services" value="Уборка домов и квартир"> Уборка домов и квартир</label>
+      <label class="opt"><input type="checkbox" id="svc_hourly_recurring" name="services" value="Уборка по часам / регулярная"> Уборка по часам / регулярная</label>
+      <label class="opt"><input type="checkbox" id="svc_deep_clean" name="services" value="Генеральная уборка"> Генеральная уборка</label>
+      <label class="opt"><input type="checkbox" id="svc_post_renovation" name="services" value="После ремонта / стройки"> После ремонта / стройки</label>
+      <label class="opt"><input type="checkbox" id="svc_move_in_out" name="services" value="Move-in / Move-out"> Move-in / Move-out</label>
+      <label class="opt"><input type="checkbox" id="svc_airbnb_turnover" name="services" value="Оборот Airbnb / краткосрочная аренда"> Оборот Airbnb / краткосрочная аренда</label>
+      <label class="opt"><input type="checkbox" id="svc_window_cleaning" name="services" value="Мойка окон"> Мойка окон</label>
+      <label class="opt"><input type="checkbox" id="svc_office_cleaning" name="services" value="Уборка офисов"> Уборка офисов</label>
+      <label class="opt"><input type="checkbox" id="svc_sofa_mattress" name="services" value="Чистка диванов / матрасов"> Чистка диванов / матрасов</label>
+      <label class="opt"><input type="checkbox" id="svc_aircon_cleaning" name="services" value="Чистка кондиционеров"> Чистка кондиционеров</label>
+      <label class="opt"><input type="checkbox" id="svc_washer_heater_cleaning" name="services" value="Чистка стиральных машин / водонагревателей"> Чистка стиральных машин / водонагревателей</label>
+      <label class="opt"><input type="checkbox" id="svc_carpets_floors" name="services" value="Ковры и напольные покрытия"> Ковры и напольные покрытия</label>
+      <label class="opt"><input type="checkbox" id="svc_disinfection" name="services" value="Дезинфекция / обработка от запахов"> Дезинфекция / обработка от запахов</label>
+      <label class="opt"><input type="checkbox" id="svc_junk_removal" name="services" value="Вывоз хлама / старой мебели"> Вывоз хлама / старой мебели</label>
+    </div>
+    <div class="field" style="margin-top:1rem"><label class="lbl" for="services_other">Другое</label><input type="text" id="services_other" name="services_other"></div>
+    <div class="field">
+      <label class="lbl">Формат работы</label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="radio" id="format_oneoff" name="format" value="Разовые заказы"> Разовые заказы</label>
+        <label class="opt"><input type="radio" id="format_recurring" name="format" value="Регулярное обслуживание (абонемент)"> Регулярное обслуживание (абонемент)</label>
+        <label class="opt"><input type="radio" id="format_both" name="format" value="Оба варианта"> Оба варианта</label>
+        <label class="opt"><input type="radio" id="format_undecided" name="format" value="Ещё не решили"> Ещё не решили</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="block">
+    <h2><span class="num">03</span> Аудитория и локация</h2>
+    <div class="field"><label class="lbl" for="coverage_area">Зона покрытия (районы / радиус)</label><input type="text" id="coverage_area" name="coverage_area"></div>
+    <div class="field">
+      <label class="lbl">Сегменты клиентов <span class="req">*</span> <span class="hint" style="display:inline">— под каждый свой язык и аргументы</span></label>
+      <div class="opts" id="segments-group">
+        <label class="opt"><input type="checkbox" id="segment_foreigners" name="segments" value="Иностранцы, живущие во Вьетнаме"> <span><b>Иностранцы, живущие во Вьетнаме</b><span class="o-hint">EN, ценят доверие и пунктуальность, часто платят в USD</span></span></label>
+        <label class="opt"><input type="checkbox" id="segment_locals" name="segments" value="Местные вьетнамцы"> <span><b>Местные вьетнамцы</b><span class="o-hint">VI, чувствительны к цене, привыкли к app-booking, оплата ₫</span></span></label>
+        <label class="opt"><input type="checkbox" id="segment_b2b" name="segments" value="B2B / коммерция"> <span><b>B2B / коммерция</b><span class="o-hint">офисы, кафе, апартаменты, Airbnb-хосты; нужны договор и счёт</span></span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Тип объектов <span class="req">*</span></label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="radio" id="objtype_private" name="objtype" value="Частные дома / квартиры / виллы"> Частные дома / квартиры / виллы</label>
+        <label class="opt"><input type="radio" id="objtype_commercial" name="objtype" value="Коммерческие объекты"> Коммерческие объекты</label>
+        <label class="opt"><input type="radio" id="objtype_both" name="objtype" value="Оба варианта"> Оба варианта</label>
+      </div>
+    </div>
+    <div class="field"><label class="lbl" for="priority_segment">Приоритетный сегмент №1 (на ком фокус)</label><input type="text" id="priority_segment" name="priority_segment"></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="block">
+    <h2><span class="num">04</span> Рынок и конкуренты</h2>
+    <div class="trend">
+      <b>Ориентиры по рынку — на кого смотреть (проверено, актуально на 2026):</b>
+      <ul class="t-list">
+        <li><b>Приложения (по всей стране):</b> bTaskee, JupViec, eClean. Уборка по часам, оплата наличными / переводом / MoMo / ZaloPay, гарантия бесплатной переуборки.</li>
+        <li><b>Дананг, местные:</b> 3Clean, Song Anh Hygiene. Почасовая уборка, обученный персонал, прозрачные цены.</li>
+        <li><b>Дананг, для иностранцев:</b> Thu Huyen Clean — англоязычные, запись через Zalo, проверка персонала, move-in/out и Airbnb. Это ваш ближайший аналог.</li>
+        <li><b>Хошимин, премиум:</b> TKT Clean, Ayasan, ZenHome24h. «Японский стандарт», для иностранцев и бизнеса.</li>
+        <li><b>Корпоративный (B2B):</b> AGS Vietnam — сертификация ISO, офисы и здания.</li>
+      </ul>
+    </div>
+    <div class="field"><label class="lbl" for="competitors_list">Ваши конкуренты / похожие сервисы</label><textarea id="competitors_list" name="competitors_list"></textarea></div>
+    <div class="field"><label class="lbl" for="competitors_strengths">Что у них сделано хорошо (что перенять)</label><textarea id="competitors_strengths" name="competitors_strengths"></textarea></div>
+    <div class="field"><label class="lbl" for="competitors_gaps">Чего им не хватает (ваша возможность)</label><textarea id="competitors_gaps" name="competitors_gaps"></textarea></div>
+  </section>
+
+  <!-- 5 -->
+  <section class="block">
+    <h2><span class="num">05</span> Позиционирование и отличия</h2>
+    <div class="field">
+      <label class="lbl">Чем хотите отличаться <span class="hint" style="display:inline">— выберите 1–2 главных</span></label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="diff_price" name="differentiators" value="Цена"> Цена</label>
+        <label class="opt"><input type="checkbox" id="diff_quality" name="differentiators" value="Качество / гарантия результата"> Качество / гарантия результата</label>
+        <label class="opt"><input type="checkbox" id="diff_speed" name="differentiators" value="Скорость / пунктуальность"> Скорость / пунктуальность</label>
+        <label class="opt"><input type="checkbox" id="diff_care" name="differentiators" value="Сервис и забота"> Сервис и забота</label>
+        <label class="opt"><input type="checkbox" id="diff_experience" name="differentiators" value="Опыт / проверенный персонал"> Опыт / проверенный персонал</label>
+        <label class="opt"><input type="checkbox" id="diff_english_support" name="differentiators" value="Англоязычная поддержка"> Англоязычная поддержка</label>
+        <label class="opt"><input type="checkbox" id="diff_eco" name="differentiators" value="Эко / безопасная химия"> Эко / безопасная химия</label>
+      </div>
+    </div>
+    <div class="field"><label class="lbl" for="positioning_statement">Одно предложение-позиционирование (за что вас выбирают)</label><span class="hint">Пример: «Англоязычный клининг в Дананге с проверенным персоналом и фиксированной ценой — без сюрпризов».</span><textarea id="positioning_statement" name="positioning_statement"></textarea></div>
+    <div class="field"><label class="lbl" for="customer_objections">Главные страхи / возражения клиента, которые надо снять</label><span class="hint">Во Вьетнаме это обычно: чужие люди в доме (безопасность), языковой барьер, непрозрачная цена, не придут вовремя, плохо уберут.</span><textarea id="customer_objections" name="customer_objections"></textarea></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="block">
+    <h2><span class="num">06</span> Цены и предложение</h2>
+    <div class="field">
+      <label class="lbl">Модель ценообразования</label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="pricing_per_hour" name="pricing_model" value="За час"> За час</label>
+        <label class="opt"><input type="checkbox" id="pricing_per_visit" name="pricing_model" value="За визит"> За визит</label>
+        <label class="opt"><input type="checkbox" id="pricing_per_property" name="pricing_model" value="За объект / пакет"> За объект / пакет</label>
+        <label class="opt"><input type="checkbox" id="pricing_per_unit" name="pricing_model" value="За м² / окно / единицу"> За м² / окно / единицу</label>
+        <label class="opt"><input type="checkbox" id="pricing_fixed_packages" name="pricing_model" value="Фикс-пакеты (Basic / Standard / Deep)"> Фикс-пакеты (Basic / Standard / Deep)</label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Валюта на сайте <span class="req">*</span></label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="currency_vnd" name="currency" value="₫ (VND) — для местных"> ₫ (VND) — для местных</label>
+        <label class="opt"><input type="checkbox" id="currency_usd" name="currency" value="$ (USD) — для иностранцев"> $ (USD) — для иностранцев</label>
+        <label class="opt"><input type="checkbox" id="currency_gbp" name="currency" value="£ (GBP) — фунты"> £ (GBP) — фунты</label>
+        <label class="opt"><input type="checkbox" id="currency_eur" name="currency" value="€ (EUR) — евро"> € (EUR) — евро</label>
+        <label class="opt"><input type="checkbox" id="currency_multi" name="currency" value="Несколько (переключение по языку)"> Несколько (переключение по языку)</label>
+        <label class="opt"><input type="checkbox" id="currency_other" name="currency" value="Другое"> Другое</label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Показывать ли цены на сайте <span class="req">*</span></label>
+      <div class="opts">
+        <label class="opt"><input type="radio" id="prices_full" name="prices" value="Да, полностью"> Да, полностью (повышает доверие у иностранцев)</label>
+        <label class="opt"><input type="radio" id="prices_partial" name="prices" value="Частично"> Частично («from … ₫ / from $…»)</label>
+        <label class="opt"><input type="radio" id="prices_none" name="prices" value="Нет"> Нет (только заявка / расчёт)</label>
+        <label class="opt"><input type="radio" id="prices_undecided" name="prices" value="Ещё не решили"> Ещё не решили</label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Способы оплаты <span class="req">*</span> <span class="hint" style="display:inline">— местные ждут привычные</span></label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="pay_cash" name="payment_methods" value="Наличные"> Наличные</label>
+        <label class="opt"><input type="checkbox" id="pay_bank_transfer" name="payment_methods" value="Банковский перевод / QR"> Банковский перевод / QR</label>
+        <label class="opt"><input type="checkbox" id="pay_momo" name="payment_methods" value="MoMo"> MoMo</label>
+        <label class="opt"><input type="checkbox" id="pay_zalopay" name="payment_methods" value="ZaloPay"> ZaloPay</label>
+        <label class="opt"><input type="checkbox" id="pay_vnpay" name="payment_methods" value="VNPay"> VNPay</label>
+        <label class="opt"><input type="checkbox" id="pay_card_usd" name="payment_methods" value="Карта / USD (иностранцы)"> Карта / USD (иностранцы)</label>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field"><label class="lbl" for="payment_timing">Предоплата или постоплата</label><input type="text" id="payment_timing" name="payment_timing"></div>
+      <div class="field"><label class="lbl" for="new_customer_offer">Акция для новых клиентов</label><input type="text" id="new_customer_offer" name="new_customer_offer" placeholder="напр. −20% на первый заказ"></div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="block">
+    <h2><span class="num">07</span> Доверие и легализация</h2>
+    <p class="block-hint">Ключевой блок для Вьетнама: клиент пускает незнакомых людей в дом. Чем сильнее доверие — тем выше конверсия и чек.</p>
+    <fieldset>
+      <legend>Юридический статус</legend>
+      <div class="grid-2">
+        <div class="field"><label class="lbl" for="business_license_no">№ лицензии / регистрации бизнеса</label><input type="text" id="business_license_no" name="business_license_no" inputmode="numeric"></div>
+        <div class="field"><label class="lbl" for="tax_code">Налоговый код</label><input type="text" id="tax_code" name="tax_code" inputmode="numeric"></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Сигналы доверия, которые можно показать</legend>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="trust_contract" name="trust_signals" value="Договор с клиентом"> Договор с клиентом</label>
+        <label class="opt"><input type="checkbox" id="trust_liability" name="trust_signals" value="Ответственность за ущерб / порчу"> Ответственность за ущерб / порчу</label>
+        <label class="opt"><input type="checkbox" id="trust_guarantee" name="trust_signals" value="Гарантия (бесплатная переуборка)"> Гарантия (бесплатная переуборка)</label>
+        <label class="opt"><input type="checkbox" id="trust_staff_vetting" name="trust_signals" value="Проверка персонала / документы"> Проверка персонала / документы</label>
+        <label class="opt"><input type="checkbox" id="trust_training" name="trust_signals" value="Обучение / стандарты уборки"> Обучение / стандарты уборки</label>
+        <label class="opt"><input type="checkbox" id="trust_insurance" name="trust_signals" value="Страховка"> Страховка</label>
+        <label class="opt"><input type="checkbox" id="trust_team_photos" name="trust_signals" value="Фото и имена команды"> Фото и имена команды</label>
+        <label class="opt"><input type="checkbox" id="trust_reviews" name="trust_signals" value="Отзывы (Google / FB / Zalo)"> Отзывы (Google / FB / Zalo)</label>
+        <label class="opt"><input type="checkbox" id="trust_track_record" name="trust_signals" value="Кол-во заказов / лет на рынке"> Кол-во заказов / лет на рынке</label>
+      </div>
+      <div class="field" style="margin-top:1rem"><label class="lbl" for="guarantee_phrase">Гарантия одной фразой</label><input type="text" id="guarantee_phrase" name="guarantee_phrase"></div>
+    </fieldset>
+  </section>
+
+  <!-- 8 -->
+  <section class="block">
+    <h2><span class="num">08</span> Заявки и операционка</h2>
+    <div class="field">
+      <label class="lbl">Как клиенты записываются <span class="hint" style="display:inline">— во Вьетнаме Zalo, не WhatsApp</span></label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="booking_zalo" name="booking_channels" value="Zalo"> Zalo</label>
+        <label class="opt"><input type="checkbox" id="booking_phone" name="booking_channels" value="Телефон (click-to-call)"> Телефон (click-to-call)</label>
+        <label class="opt"><input type="checkbox" id="booking_site_form" name="booking_channels" value="Форма на сайте"> Форма на сайте</label>
+        <label class="opt"><input type="checkbox" id="booking_messenger" name="booking_channels" value="Facebook Messenger"> Facebook Messenger</label>
+        <label class="opt"><input type="checkbox" id="booking_whatsapp_telegram" name="booking_channels" value="WhatsApp / Telegram (иностранцы)"> WhatsApp / Telegram (иностранцы)</label>
+        <label class="opt"><input type="checkbox" id="booking_online_calendar" name="booking_channels" value="Онлайн-бронирование (дата/время)"> Онлайн-бронирование (дата/время)</label>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field"><label class="lbl" for="contact_email">Email для заявок <span class="req">*</span></label><input type="email" id="contact_email" name="contact_email" inputmode="email" autocomplete="email"></div>
+      <div class="field"><label class="lbl" for="contact_zalo_phone">Zalo / телефон <span class="req">*</span></label><input type="text" id="contact_zalo_phone" name="contact_zalo_phone" inputmode="tel" autocomplete="tel"></div>
+      <div class="field"><label class="lbl" for="working_hours">Часы работы / время ответа</label><input type="text" id="working_hours" name="working_hours"></div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="block">
+    <h2><span class="num">09</span> Бренд и дизайн</h2>
+    <fieldset>
+      <div class="grid-2">
+        <div class="field">
+          <label class="lbl">Логотип</label>
+          <div class="opts">
+            <label class="opt"><input type="radio" id="logo_have" name="logo" value="Есть (приложу файл)"> Есть (приложу файл)</label>
+            <label class="opt"><input type="radio" id="logo_need_new" name="logo" value="Нужен новый"> Нужен новый</label>
+            <label class="opt"><input type="radio" id="logo_not_important" name="logo" value="Пока не важно"> Пока не важно</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="lbl">Общий стиль <span class="req">*</span></label>
+          <div class="opts">
+            <label class="opt"><input type="radio" id="style_minimal" name="style" value="Минимализм / воздушно"> Минимализм / воздушно</label>
+            <label class="opt"><input type="radio" id="style_classic" name="style" value="Классический / строгий"> Классический / строгий</label>
+            <label class="opt"><input type="radio" id="style_modern_friendly" name="style" value="Современный / дружелюбный"> Современный / дружелюбный</label>
+            <label class="opt"><input type="radio" id="style_premium" name="style" value="Премиальный / high-end"> Премиальный / high-end</label>
+            <label class="opt"><input type="radio" id="style_undecided" name="style" value="Ещё в стадии продумывания"> Ещё в стадии продумывания</label>
+          </div>
+        </div>
+      </div>
+      <div class="field"><label class="lbl" for="brand_mood">Настроение бренда (3–5 слов)</label><input type="text" id="brand_mood" name="brand_mood" placeholder="чисто, спокойно, надёжно, свежо, забота"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Цветовая палитра — выберите направление <span class="req">*</span></legend>
+      <div class="trend">
+        <b>Какие цвета в тренде в 2026 году:</b>
+        <ul class="t-list">
+          <li><b>Синий и сине-зелёный</b> — главный тренд года (по данным Etsy, Pinterest, WGSN). Это варианты D, E, G, H, I.</li>
+          <li><b>Зелёный</b> — читается как «эко» и «чистота», хорошо подходит клинингу. Варианты B, J, K.</li>
+          <li><b>Тёплые и нейтральные</b> — спокойно и дорого. Варианты A, F, L.</li>
+        </ul>
+        Совет: светлый цвет лучше сочетать с одним глубоким, иначе он теряется на белом фоне. Сейчас страница оформлена в варианте <b>G — Cool Blue</b>.
+      </div>
+      <div class="palette">
+        <label class="pal">
+          <input type="radio" id="palette_warm_slate" name="palette" value="A — Warm Slate" checked>
+          <div class="swatches"><span style="background:#F4F1EA"></span><span style="background:#23272A"></span><span style="background:#1F5C63"></span><span style="background:#D8C7AE"></span></div>
+          <div>
+            <div class="p-title">A — Warm Slate <span class="p-desc">· премиум, под иностранцев</span></div>
+            <div class="p-hex">#F4F1EA · #23272A · #1F5C63 · #D8C7AE</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_eco_sage" name="palette" value="B — Eco Sage">
+          <div class="swatches"><span style="background:#F3F2EC"></span><span style="background:#1E2A24"></span><span style="background:#6E8B74"></span><span style="background:#4A3A32"></span></div>
+          <div>
+            <div class="p-title">B — Eco Sage <span class="p-desc">· эко / безопасная химия</span></div>
+            <div class="p-hex">#F3F2EC · #1E2A24 · #6E8B74 · #4A3A32</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_fresh_confident" name="palette" value="C — Fresh Confident">
+          <div class="swatches"><span style="background:#FBFAF6"></span><span style="background:#13414A"></span><span style="background:#E8623C"></span><span style="background:#BFE3DA"></span></div>
+          <div>
+            <div class="p-title">C — Fresh Confident <span class="p-desc">· дружелюбный масс-маркет</span></div>
+            <div class="p-hex">#FBFAF6 · #13414A · #E8623C · #BFE3DA</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_trust_blue" name="palette" value="D — Trust Blue">
+          <div class="swatches"><span style="background:#F4F4EF"></span><span style="background:#16202B"></span><span style="background:#1B4965"></span><span style="background:#5FA8D3"></span></div>
+          <div>
+            <div class="p-title">D — Trust Blue <span class="p-desc">· классический синий, доверие</span></div>
+            <div class="p-hex">#F4F4EF · #16202B · #1B4965 · #5FA8D3</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_patina_blue" name="palette" value="E — Patina Blue">
+          <div class="swatches"><span style="background:#F1F3F2"></span><span style="background:#14303A"></span><span style="background:#3E7C8C"></span><span style="background:#A9CBD2"></span></div>
+          <div>
+            <div class="p-title">E — Patina Blue <span class="p-desc">· синий тренда 2026, свежий</span></div>
+            <div class="p-hex">#F1F3F2 · #14303A · #3E7C8C · #A9CBD2</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_quiet_luxe" name="palette" value="F — Quiet Luxe">
+          <div class="swatches"><span style="background:#F2ECE1"></span><span style="background:#272320"></span><span style="background:#6E3D52"></span><span style="background:#C9B8A3"></span></div>
+          <div>
+            <div class="p-title">F — Quiet Luxe <span class="p-desc">· новинка 2026: quiet luxury + Damson</span></div>
+            <div class="p-hex">#F2ECE1 · #272320 · #6E3D52 · #C9B8A3</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_cool_blue" name="palette" value="G — Cool Blue">
+          <div class="swatches"><span style="background:#EEF4FA"></span><span style="background:#16222E"></span><span style="background:#235A8C"></span><span style="background:#D7EFFF"></span></div>
+          <div>
+            <div class="p-title">G — Cool Blue <span class="p-desc">· Pinterest 2026: ледяной + глубокий анкор</span></div>
+            <div class="p-hex">#EEF4FA · #16222E · #235A8C · #D7EFFF</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_cobalt_confidence" name="palette" value="H — Cobalt Confidence">
+          <div class="swatches"><span style="background:#F4F6FA"></span><span style="background:#222D44"></span><span style="background:#336DE1"></span><span style="background:#ADBBD7"></span></div>
+          <div>
+            <div class="p-title">H — Cobalt Confidence <span class="p-desc">· смелый кобальт 2026 (ColorArchive)</span></div>
+            <div class="p-hex">#F4F6FA · #222D44 · #336DE1 · #ADBBD7</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_blue_aura" name="palette" value="I — Blue Aura">
+          <div class="swatches"><span style="background:#EEF2F4"></span><span style="background:#1F2A33"></span><span style="background:#41637A"></span><span style="background:#C3D2DA"></span></div>
+          <div>
+            <div class="p-title">I — Blue Aura <span class="p-desc">· WGSN 2026: спокойный дымчатый синий</span></div>
+            <div class="p-hex">#EEF2F4 · #1F2A33 · #41637A · #C3D2DA</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_eco_jade" name="palette" value="J — Eco Jade">
+          <div class="swatches"><span style="background:#EFF3ED"></span><span style="background:#1E2A20"></span><span style="background:#3F7A5E"></span><span style="background:#AEB8A0"></span></div>
+          <div>
+            <div class="p-title">J — Eco Jade <span class="p-desc">· Pinterest Jade 2026, эко-зелёный</span></div>
+            <div class="p-hex">#EFF3ED · #1E2A20 · #3F7A5E · #AEB8A0</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_transformative_teal" name="palette" value="K — Transformative Teal">
+          <div class="swatches"><span style="background:#EDF3F2"></span><span style="background:#122A2B"></span><span style="background:#1F5C63"></span><span style="background:#7FB3B0"></span></div>
+          <div>
+            <div class="p-title">K — Transformative Teal <span class="p-desc">· цвет года WGSN 2026, сине-зелёный</span></div>
+            <div class="p-hex">#EDF3F2 · #122A2B · #1F5C63 · #7FB3B0</div>
+          </div>
+        </label>
+        <label class="pal">
+          <input type="radio" id="palette_warm_clay" name="palette" value="L — Warm Clay">
+          <div class="swatches"><span style="background:#F3EDE5"></span><span style="background:#2A2320"></span><span style="background:#B05E3B"></span><span style="background:#D8C3A8"></span></div>
+          <div>
+            <div class="p-title">L — Warm Clay <span class="p-desc">· тёплая земля/терракота, тренд 2026</span></div>
+            <div class="p-hex">#F3EDE5 · #2A2320 · #B05E3B · #D8C3A8</div>
+          </div>
+        </label>
+      </div>
+      <div class="field" style="margin-top:1rem"><label class="lbl" for="palette_custom">Свой вариант / фирменные цвета</label><input type="text" id="palette_custom" name="palette_custom"></div>
+    </fieldset>
+    <fieldset>
+      <div class="field"><label class="lbl" for="photo_video_style">Стиль фото / видео</label><span class="hint">Тёплый свет и реальные люди/команда работают лучше холодных «синих» стоков.</span><input type="text" id="photo_video_style" name="photo_video_style"></div>
+      <div class="field"><label class="lbl" for="design_dislikes">Что в дизайне точно НЕ нравится</label><textarea id="design_dislikes" name="design_dislikes"></textarea></div>
+      <div class="field"><label class="lbl" for="reference_sites">Сайты-референсы (2–3 ссылки + чем нравятся)</label><textarea id="reference_sites" name="reference_sites"></textarea></div>
+    </fieldset>
+  </section>
+
+  <!-- 10 -->
+  <section class="block">
+    <h2><span class="num">10</span> Тексты и тон</h2>
+    <div class="field">
+      <label class="lbl">Кто готовит тексты</label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="radio" id="copy_client" name="copy" value="Клиент самостоятельно"> Клиент самостоятельно</label>
+        <label class="opt"><input type="radio" id="copy_developer" name="copy" value="Разработчик (AI-assisted), клиент проверяет"> Разработчик (AI-assisted), клиент проверяет</label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Тон коммуникации</label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="tone_formal" name="tone" value="Строгий / профессиональный"> Строгий / профессиональный</label>
+        <label class="opt"><input type="checkbox" id="tone_friendly" name="tone" value="Простой и дружелюбный"> Простой и дружелюбный</label>
+        <label class="opt"><input type="checkbox" id="tone_premium_caring" name="tone" value="Премиальный / забота"> Премиальный / забота</label>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field"><label class="lbl" for="tone_en">Тон для EN (иностранцы)</label><input type="text" id="tone_en" name="tone_en"></div>
+      <div class="field"><label class="lbl" for="tone_vi">Тон для VI (местные)</label><input type="text" id="tone_vi" name="tone_vi"></div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="block">
+    <h2><span class="num">11</span> Структура сайта</h2>
+    <div class="field">
+      <label class="lbl">Формат <span class="req">*</span></label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="radio" id="sitetype_landing" name="sitetype" value="Лендинг (1 страница)"> Лендинг (1 страница)</label>
+        <label class="opt"><input type="radio" id="sitetype_multipage" name="sitetype" value="Многостраничный сайт"> Многостраничный сайт</label>
+        <label class="opt"><input type="radio" id="sitetype_undecided" name="sitetype" value="Ещё не решили"> Ещё не решили</label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Нужные блоки / страницы</label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="block_hero" name="site_blocks" value="Hero (заглавный экран + CTA)"> Hero (заглавный экран + CTA)</label>
+        <label class="opt"><input type="checkbox" id="block_services" name="site_blocks" value="Услуги"> Услуги</label>
+        <label class="opt"><input type="checkbox" id="block_why_us" name="site_blocks" value="Почему мы / доверие"> Почему мы / доверие</label>
+        <label class="opt"><input type="checkbox" id="block_how_it_works" name="site_blocks" value="Как это работает (3 шага)"> Как это работает (3 шага)</label>
+        <label class="opt"><input type="checkbox" id="block_pricing" name="site_blocks" value="Цены / пакеты"> Цены / пакеты</label>
+        <label class="opt"><input type="checkbox" id="block_reviews" name="site_blocks" value="Отзывы"> Отзывы</label>
+        <label class="opt"><input type="checkbox" id="block_before_after" name="site_blocks" value="Галерея «до/после»"> Галерея «до/после»</label>
+        <label class="opt"><input type="checkbox" id="block_faq" name="site_blocks" value="FAQ"> FAQ</label>
+        <label class="opt"><input type="checkbox" id="block_service_area" name="site_blocks" value="Зона обслуживания / карта"> Зона обслуживания / карта</label>
+        <label class="opt"><input type="checkbox" id="block_about_team" name="site_blocks" value="О нас / команда"> О нас / команда</label>
+        <label class="opt"><input type="checkbox" id="block_contacts_form" name="site_blocks" value="Контакты + форма"> Контакты + форма</label>
+        <label class="opt"><input type="checkbox" id="block_blog_seo" name="site_blocks" value="Блог / SEO-страницы по районам"> Блог / SEO-страницы по районам</label>
+      </div>
+    </div>
+    <div class="field"><label class="lbl" for="site_blocks_other">Другие блоки / страницы — впишите свои</label><span class="hint">Чего нет в списке выше: например, «Сертификаты», «Вакансии», «Калькулятор», «Подписка на уборку».</span><textarea id="site_blocks_other" name="site_blocks_other" placeholder="Например: страница «Сертификаты», блок «Наша команда»…"></textarea></div>
+    <div class="field"><label class="lbl" for="site_blocks_priority">Приоритет / порядок блоков (если лендинг)</label><textarea id="site_blocks_priority" name="site_blocks_priority"></textarea></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="block">
+    <h2><span class="num">12</span> Функционал <span class="req">*</span></h2>
+    <div class="opts cols-2">
+      <label class="opt"><input type="checkbox" id="feature_request_form" name="features" value="Форма заявки"> Форма заявки</label>
+      <label class="opt"><input type="checkbox" id="feature_zalo_button" name="features" value="Плавающая кнопка Zalo"> Плавающая кнопка Zalo</label>
+      <label class="opt"><input type="checkbox" id="feature_click_to_call" name="features" value="Click-to-call"> Click-to-call</label>
+      <label class="opt"><input type="checkbox" id="feature_messenger_whatsapp" name="features" value="Facebook Messenger / WhatsApp"> Facebook Messenger / WhatsApp</label>
+      <label class="opt"><input type="checkbox" id="feature_price_calculator" name="features" value="Калькулятор стоимости"> Калькулятор стоимости</label>
+      <label class="opt"><input type="checkbox" id="feature_online_calendar" name="features" value="Онлайн-календарь записи"> Онлайн-календарь записи</label>
+      <label class="opt"><input type="checkbox" id="feature_reviews_embed" name="features" value="Отзывы (Google / FB embed)"> Отзывы (Google / FB embed)</label>
+      <label class="opt"><input type="checkbox" id="feature_service_area_map" name="features" value="Карта зоны обслуживания"> Карта зоны обслуживания</label>
+      <label class="opt"><input type="checkbox" id="feature_before_after_gallery" name="features" value="Галерея «до/после»"> Галерея «до/после»</label>
+      <label class="opt"><input type="checkbox" id="feature_lang_switcher" name="features" value="Переключатель языка EN / VI"> Переключатель языка EN / VI</label>
+    </div>
+    <div class="field" style="margin-top:1rem"><label class="lbl" for="features_other">Другое</label><input type="text" id="features_other" name="features_other"></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="block">
+    <h2><span class="num">13</span> Язык и SEO-каналы</h2>
+    <div class="field"><label class="lbl" for="site_languages">Языки сайта <span class="req">*</span></label><input type="text" id="site_languages" name="site_languages" value="EN + VI" placeholder="EN + VI"></div>
+    <div class="field">
+      <label class="lbl">Откуда планируете трафик</label>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="traffic_google_maps" name="traffic_sources" value="Google / Google Maps (локальный SEO)"> Google / Google Maps (локальный SEO)</label>
+        <label class="opt"><input type="checkbox" id="traffic_fb_groups" name="traffic_sources" value="Facebook-группы иностранцев"> Facebook-группы иностранцев</label>
+        <label class="opt"><input type="checkbox" id="traffic_fb_page_ads" name="traffic_sources" value="Facebook Page / реклама"> Facebook Page / реклама</label>
+        <label class="opt"><input type="checkbox" id="traffic_zalo" name="traffic_sources" value="Zalo"> Zalo</label>
+        <label class="opt"><input type="checkbox" id="traffic_tiktok" name="traffic_sources" value="TikTok"> TikTok</label>
+        <label class="opt"><input type="checkbox" id="traffic_word_of_mouth" name="traffic_sources" value="Сарафан / рекомендации"> Сарафан / рекомендации</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="block">
+    <h2><span class="num">14</span> Контент-актив (что уже есть)</h2>
+    <div class="opts cols-2">
+      <label class="opt"><input type="checkbox" id="content_real_work_photos" name="content_assets" value="Фото реальных работ"> Фото реальных работ</label>
+      <label class="opt"><input type="checkbox" id="content_before_after_photos" name="content_assets" value="Фото «до/после»"> Фото «до/после»</label>
+      <label class="opt"><input type="checkbox" id="content_team_photos" name="content_assets" value="Фото команды"> Фото команды</label>
+      <label class="opt"><input type="checkbox" id="content_process_video" name="content_assets" value="Видео процесса"> Видео процесса</label>
+      <label class="opt"><input type="checkbox" id="content_customer_reviews" name="content_assets" value="Отзывы клиентов"> Отзывы клиентов</label>
+    </div>
+    <fieldset>
+      <legend>Существующие профили и ссылки</legend>
+      <div class="grid-2">
+        <div class="field"><label class="lbl" for="profile_google_business">Google Business</label><input type="text" id="profile_google_business" name="profile_google_business"></div>
+        <div class="field"><label class="lbl" for="profile_facebook">Facebook</label><input type="text" id="profile_facebook" name="profile_facebook"></div>
+        <div class="field"><label class="lbl" for="profile_zalo_oa">Zalo OA</label><input type="text" id="profile_zalo_oa" name="profile_zalo_oa"></div>
+        <div class="field"><label class="lbl" for="profile_tiktok_instagram">TikTok / Instagram</label><input type="text" id="profile_tiktok_instagram" name="profile_tiktok_instagram"></div>
+      </div>
+    </fieldset>
+  </section>
+
+  <!-- 15 -->
+  <section class="block">
+    <h2><span class="num">15</span> Техническое и запуск</h2>
+    <p class="block-hint">Как сайт будет работать после запуска: оплата, заявки, аналитика, обновление контента.</p>
+    <fieldset>
+      <legend>Оплата на сайте</legend>
+      <div class="field">
+        <label class="lbl">Как принимаете оплату на сайте <span class="req">*</span></label>
+        <div class="opts">
+          <label class="opt"><input type="radio" id="pay_request_only" name="pay" value="Только заявка"> Только заявка (оплата при встрече / переводом вручную)</label>
+          <label class="opt"><input type="radio" id="pay_online_gateway" name="pay" value="Онлайн-оплата на сайте"> Онлайн-оплата на сайте (платёжный шлюз)</label>
+          <label class="opt"><input type="radio" id="pay_both" name="pay" value="И то, и другое"> И то, и другое</label>
+          <label class="opt"><input type="radio" id="pay_undecided" name="pay" value="Ещё не решили"> Ещё не решили</label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Заявки: куда уходят и оповещения</legend>
+      <div class="field">
+        <label class="lbl">Куда должны приходить заявки <span class="req">*</span></label>
+        <div class="opts cols-2">
+          <label class="opt"><input type="checkbox" id="leads_to_email" name="leads_destinations" value="Email"> Email</label>
+          <label class="opt"><input type="checkbox" id="leads_to_zalo" name="leads_destinations" value="Zalo"> Zalo</label>
+          <label class="opt"><input type="checkbox" id="leads_to_telegram" name="leads_destinations" value="Telegram"> Telegram</label>
+          <label class="opt"><input type="checkbox" id="leads_to_crm_sheet" name="leads_destinations" value="CRM / Google Sheet"> CRM / Google Sheet</label>
+          <label class="opt"><input type="checkbox" id="leads_to_other" name="leads_destinations" value="Другое"> Другое</label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="lbl">Email-оповещения <span class="req">*</span></label>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" id="email_notify_business" name="email_notifications" value="Письмо бизнесу о новой заявке"> Письмо бизнесу о новой заявке</label>
+          <label class="opt"><input type="checkbox" id="email_notify_customer_thanks" name="email_notifications" value="Авто-письмо «Спасибо» клиенту"> Авто-письмо «Спасибо» клиенту</label>
+        </div>
+      </div>
+      <div class="field"><label class="lbl" for="leads_tracking_place">Где отслеживать заявки</label><span class="hint">Например: общий ящик, Google-таблица, CRM, Telegram-чат.</span><input type="text" id="leads_tracking_place" name="leads_tracking_place"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Аналитика <span class="req">*</span></legend>
+      <p class="block-hint">Аналитика — это счётчики, которые показывают, сколько людей зашло на сайт, откуда они пришли и сколько оставили заявок. Нужна, чтобы понимать, окупается ли реклама.</p>
+      <div class="opts cols-2">
+        <label class="opt"><input type="checkbox" id="analytics_ga4" name="analytics_tools" value="Google Analytics (GA4)"> Google Analytics (GA4) — статистика посещений</label>
+        <label class="opt"><input type="checkbox" id="analytics_gtm" name="analytics_tools" value="Google Tag Manager"> Google Tag Manager — управление счётчиками</label>
+        <label class="opt"><input type="checkbox" id="analytics_meta_pixel" name="analytics_tools" value="Meta Pixel (Facebook)"> Meta Pixel (Facebook) — для рекламы в FB/Instagram</label>
+        <label class="opt"><input type="checkbox" id="analytics_gsc" name="analytics_tools" value="Google Search Console"> Google Search Console — позиции в поиске</label>
+        <label class="opt"><input type="checkbox" id="analytics_not_needed" name="analytics_tools" value="Пока не нужно"> Пока не нужно</label>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label class="lbl">Уже есть аккаунты Google / Meta?</label>
+        <div class="opts cols-2">
+          <label class="opt"><input type="radio" id="analyticsacc_yes" name="analyticsacc" value="Да"> Да</label>
+          <label class="opt"><input type="radio" id="analyticsacc_no" name="analyticsacc" value="Нет"> Нет</label>
+          <label class="opt"><input type="radio" id="analyticsacc_unknown" name="analyticsacc" value="Не знаю"> Не знаю</label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Обновление контента</legend>
+      <div class="field">
+        <label class="lbl">Как планируете обновлять тексты, фото, цены <span class="req">*</span></label>
+        <span class="hint">От этого зависит, нужна ли админка (CMS) или хватит статики.</span>
+        <div class="opts">
+          <label class="opt"><input type="radio" id="cms_static" name="cms" value="Достаточно статики"> Достаточно статики — правки делает разработчик / ИИ-агент по запросу</label>
+          <label class="opt"><input type="radio" id="cms_needed" name="cms" value="Нужна простая админка (CMS)"> Нужна простая админка (CMS), чтобы менять самому</label>
+          <label class="opt"><input type="radio" id="cms_rarely_changes" name="cms" value="Редко меняется"> Редко меняется — пока не важно</label>
+          <label class="opt"><input type="radio" id="cms_undecided" name="cms" value="Ещё не решили"> Ещё не решили</label>
+        </div>
+      </div>
+      <div class="field"><label class="lbl" for="content_updater">Кто будет обновлять после запуска</label><input type="text" id="content_updater" name="content_updater"></div>
+    </fieldset>
+  </section>
+
+  <!-- 16 -->
+  <section class="block">
+    <h2><span class="num">16</span> Сроки и дополнительно</h2>
+    <div class="grid-2">
+      <div class="field"><label class="lbl" for="launch_timeline">Желаемые сроки запуска</label><input type="text" id="launch_timeline" name="launch_timeline"></div>
+      <div class="field"><label class="lbl" for="budget">Бюджет (если есть ориентир)</label><input type="text" id="budget" name="budget"></div>
+    </div>
+    <div class="field"><label class="lbl" for="additional_info">Любая дополнительная информация</label><textarea id="additional_info" name="additional_info"></textarea></div>
+  </section>
+
+  <div class="note" style="margin-top:2.5rem; text-align:center" id="submit-note">
+    <span id="submitNoteText">Готово? Нажмите кнопку, чтобы отправить бриф.</span>
+    <div style="margin-top:1rem">
+      <button type="submit" class="btn" id="submitBtn">Отправить бриф</button>
+    </div>
+    <div id="submitError" role="alert" style="display:none; margin-top:0.85rem; color:var(--req); font-size:0.88rem; font-weight:560;"></div>
+    <button type="button" class="btn" id="savePdfBtn" style="display:none; margin-top:0.85rem;">Сохранить как PDF</button>
+  </div>
+</form>
+
+<div class="block" id="thankyou" role="status" style="display:none; margin:2.75rem auto 0; max-width: var(--maxw); text-align:center; padding:2.75rem 1.75rem;">
+  <div style="font-size:2.6rem; line-height:1; color:var(--accent); margin-bottom:0.9rem;" aria-hidden="true">&#10003;</div>
+  <h2 id="thankyouTitle" style="border-bottom:none; padding-bottom:0; justify-content:center; font-size:1.5rem;">Спасибо!</h2>
+  <p id="thankyouText" style="color:var(--ink-soft); max-width:42ch; margin:0.6rem auto 0;">Я внимательно изучу ваш бриф и свяжусь с вами в ближайшее время.</p>
+  <p id="thankyouId" style="color:var(--ink-faint); font-size:0.78rem; margin-top:1.4rem;"></p>
+</div>
+</main>
+
+<footer class="foot">
+  <div class="hide-print">Бриф · клининговый сервис · Вьетнам · палитра Cool Blue 2026</div>
+</footer>
+
+
+<script>
+(function(){
+  var T = {"Бриф": {"en": "Brief", "vi": "Brief"}, "· клининг · Вьетнам": {"en": "· cleaning · Vietnam", "vi": "· vệ sinh · Việt Nam"}, "Печать / PDF": {"en": "Print / PDF", "vi": "In / PDF"}, "Заполнить": {"en": "Fill in", "vi": "Điền"}, "Бриф на сайт": {"en": "Website brief", "vi": "Bản brief website"}, "клинингового сервиса": {"en": "for a cleaning service", "vi": "cho dịch vụ vệ sinh"}, "Заполните поля прямо в браузере и нажмите «Отправить бриф» внизу страницы.": {"en": "Fill in the fields right in your browser and click “Submit brief” at the bottom of the page.", "vi": "Điền các trường ngay trong trình duyệt và nhấn “Gửi bản brief” ở cuối trang."}, "Рынок: Вьетнам": {"en": "Market: Vietnam", "vi": "Thị trường: Việt Nam"}, "Языки сайта: EN + VI": {"en": "Site languages: EN + VI", "vi": "Ngôn ngữ web: EN + VI"}, "Аудитория: иностранцы · местные · B2B": {"en": "Audience: foreigners · locals · B2B", "vi": "Đối tượng: người nước ngoài · người địa phương · B2B"}, "Как заполнять.": {"en": "How to fill in.", "vi": "Cách điền."}, "Отметьте подходящие варианты и впишите ответы в поля. Поля со знаком": {"en": "Tick the relevant options and type your answers in the fields. Fields marked", "vi": "Chọn các phương án phù hợp và điền câu trả lời. Các trường có dấu"}, "— обязательные. Подсказки под полями даны курсивом. Когда закончите, нажмите «Отправить бриф» внизу страницы.": {"en": "— are required. Hints under the fields are in italics. When done, click “Submit brief” at the bottom of the page.", "vi": "— là bắt buộc. Gợi ý dưới các trường được in nghiêng. Khi xong, nhấn “Gửi bản brief” ở cuối trang."}, "О бизнесе и целях": {"en": "About the business and goals", "vi": "Về doanh nghiệp và mục tiêu"}, "Общая информация": {"en": "General information", "vi": "Thông tin chung"}, "Название бизнеса": {"en": "Business name", "vi": "Tên doanh nghiệp"}, "Главный город (где базируетесь)": {"en": "Main city (where you are based)", "vi": "Thành phố chính (nơi đặt trụ sở)"}, "Адрес основного офиса (район, город)": {"en": "Main office address (district, city)", "vi": "Địa chỉ văn phòng chính (quận, thành phố)"}, "Где физически будет база: район и город. Если офиса пока нет — напишите планируемый район.": {"en": "Where the base will physically be: district and city. If there is no office yet, write the planned district.", "vi": "Nơi đặt trụ sở thực tế: quận và thành phố. Nếu chưa có văn phòng, hãy ghi quận dự kiến."}, "Краткое описание (1–2 предложения, чем занимаетесь)": {"en": "Short description (1–2 sentences about what you do)", "vi": "Mô tả ngắn (1–2 câu về việc bạn làm)"}, "Опыт работы (лет / с какого года)": {"en": "Experience (years / since when)", "vi": "Kinh nghiệm (số năm / từ năm nào)"}, "Главная цель сайта": {"en": "Main goal of the site", "vi": "Mục tiêu chính của website"}, "Заявки (лиды)": {"en": "Leads / requests", "vi": "Yêu cầu (khách tiềm năng)"}, "Доверие / имидж": {"en": "Trust / image", "vi": "Uy tín / hình ảnh"}, "И то, и другое": {"en": "Both", "vi": "Cả hai"}, "Ещё не решили": {"en": "Not decided yet", "vi": "Chưa quyết định"}, "Цели и KPI сайта": {"en": "Site goals and KPIs", "vi": "Mục tiêu và KPI của website"}, "— чтобы потом понять, работает ли он": {"en": "— so you can later tell if it works", "vi": "— để sau này biết web có hiệu quả không"}, "Заявок в месяц (цель)": {"en": "Requests per month (target)", "vi": "Số yêu cầu mỗi tháng (mục tiêu)"}, "Целевая конверсия в заявку": {"en": "Target conversion to a request", "vi": "Tỷ lệ chuyển đổi mục tiêu"}, "Макс. время ответа на заявку": {"en": "Max response time to a request", "vi": "Thời gian phản hồi tối đa"}, "Средний чек / выручка с сайта": {"en": "Average order value / revenue from the site", "vi": "Giá trị đơn trung bình / doanh thu từ web"}, "Услуги": {"en": "Services", "vi": "Dịch vụ"}, "Отметьте, что предоставляете.": {"en": "Tick what you offer.", "vi": "Chọn những gì bạn cung cấp."}, "— отметьте хотя бы одну услугу.": {"en": "— tick at least one service.", "vi": "— chọn ít nhất một dịch vụ."}, "Уборка домов и квартир": {"en": "House and apartment cleaning", "vi": "Vệ sinh nhà và căn hộ"}, "Уборка по часам / регулярная": {"en": "Hourly / recurring cleaning", "vi": "Vệ sinh theo giờ / định kỳ"}, "Генеральная уборка": {"en": "Deep cleaning", "vi": "Tổng vệ sinh"}, "После ремонта / стройки": {"en": "Post-renovation / construction", "vi": "Sau sửa chữa / xây dựng"}, "Оборот Airbnb / краткосрочная аренда": {"en": "Airbnb turnover / short-term rental", "vi": "Dọn Airbnb / cho thuê ngắn hạn"}, "Мойка окон": {"en": "Window cleaning", "vi": "Lau kính cửa sổ"}, "Уборка офисов": {"en": "Office cleaning", "vi": "Vệ sinh văn phòng"}, "Чистка диванов / матрасов": {"en": "Sofa / mattress cleaning", "vi": "Giặt sofa / nệm"}, "Чистка кондиционеров": {"en": "Air-conditioner cleaning", "vi": "Vệ sinh máy lạnh"}, "Чистка стиральных машин / водонагревателей": {"en": "Washing machine / water heater cleaning", "vi": "Vệ sinh máy giặt / máy nước nóng"}, "Ковры и напольные покрытия": {"en": "Carpets and floor coverings", "vi": "Thảm và sàn nhà"}, "Дезинфекция / обработка от запахов": {"en": "Disinfection / odour removal", "vi": "Khử khuẩn / khử mùi"}, "Вывоз хлама / старой мебели": {"en": "Junk / old furniture removal", "vi": "Dọn bỏ đồ cũ / phế thải"}, "Другое": {"en": "Other", "vi": "Khác"}, "Формат работы": {"en": "Work format", "vi": "Hình thức làm việc"}, "Разовые заказы": {"en": "One-off orders", "vi": "Đơn lẻ"}, "Регулярное обслуживание (абонемент)": {"en": "Recurring service (subscription)", "vi": "Dịch vụ định kỳ (gói)"}, "Оба варианта": {"en": "Both options", "vi": "Cả hai"}, "Аудитория и локация": {"en": "Audience and location", "vi": "Đối tượng và khu vực"}, "Зона покрытия (районы / радиус)": {"en": "Coverage area (districts / radius)", "vi": "Khu vực phục vụ (quận / bán kính)"}, "Сегменты клиентов": {"en": "Customer segments", "vi": "Phân khúc khách hàng"}, "— под каждый свой язык и аргументы": {"en": "— each has its own language and arguments", "vi": "— mỗi nhóm có ngôn ngữ và lập luận riêng"}, "Иностранцы, живущие во Вьетнаме": {"en": "Foreigners living in Vietnam", "vi": "Người nước ngoài sống tại Việt Nam"}, "EN, ценят доверие и пунктуальность, часто платят в USD": {"en": "EN, value trust and punctuality, often pay in USD", "vi": "Tiếng Anh, coi trọng uy tín và đúng giờ, thường trả bằng USD"}, "Местные вьетнамцы": {"en": "Local Vietnamese", "vi": "Người Việt địa phương"}, "VI, чувствительны к цене, привыкли к app-booking, оплата ₫": {"en": "VI, price-sensitive, used to app booking, pay in ₫", "vi": "Tiếng Việt, nhạy cảm về giá, quen đặt qua app, trả bằng ₫"}, "B2B / коммерция": {"en": "B2B / commercial", "vi": "B2B / doanh nghiệp"}, "офисы, кафе, апартаменты, Airbnb-хосты; нужны договор и счёт": {"en": "offices, cafés, apartments, Airbnb hosts; need a contract and invoice", "vi": "văn phòng, quán cà phê, căn hộ, chủ Airbnb; cần hợp đồng và hóa đơn"}, "Тип объектов": {"en": "Property type", "vi": "Loại bất động sản"}, "Частные дома / квартиры / виллы": {"en": "Private homes / apartments / villas", "vi": "Nhà riêng / căn hộ / biệt thự"}, "Коммерческие объекты": {"en": "Commercial properties", "vi": "Cơ sở thương mại"}, "Приоритетный сегмент №1 (на ком фокус)": {"en": "Priority segment #1 (main focus)", "vi": "Phân khúc ưu tiên số 1 (tập trung vào ai)"}, "Рынок и конкуренты": {"en": "Market and competitors", "vi": "Thị trường và đối thủ"}, "Ориентиры по рынку — на кого смотреть (проверено, актуально на 2026):": {"en": "Market reference — who to look at (verified, current for 2026):", "vi": "Tham khảo thị trường — nên xem ai (đã kiểm chứng, cập nhật 2026):"}, "Приложения (по всей стране):": {"en": "Apps (nationwide):", "vi": "Ứng dụng (toàn quốc):"}, "bTaskee, JupViec, eClean. Уборка по часам, оплата наличными / переводом / MoMo / ZaloPay, гарантия бесплатной переуборки.": {"en": "bTaskee, JupViec, eClean. Hourly cleaning, payment by cash / transfer / MoMo / ZaloPay, free re-clean guarantee.", "vi": "bTaskee, JupViec, eClean. Vệ sinh theo giờ, thanh toán tiền mặt / chuyển khoản / MoMo / ZaloPay, bảo hành dọn lại miễn phí."}, "Дананг, местные:": {"en": "Da Nang, local:", "vi": "Đà Nẵng, địa phương:"}, "3Clean, Song Anh Hygiene. Почасовая уборка, обученный персонал, прозрачные цены.": {"en": "3Clean, Song Anh Hygiene. Hourly cleaning, trained staff, transparent prices.", "vi": "3Clean, Song Anh Hygiene. Vệ sinh theo giờ, nhân viên được đào tạo, giá minh bạch."}, "Дананг, для иностранцев:": {"en": "Da Nang, for foreigners:", "vi": "Đà Nẵng, cho người nước ngoài:"}, "Thu Huyen Clean — англоязычные, запись через Zalo, проверка персонала, move-in/out и Airbnb. Это ваш ближайший аналог.": {"en": "Thu Huyen Clean — English-speaking, booking via Zalo, staff background checks, move-in/out and Airbnb. This is your closest analogue.", "vi": "Thu Huyen Clean — nói tiếng Anh, đặt qua Zalo, kiểm tra lý lịch nhân viên, move-in/out và Airbnb. Đây là đối thủ gần nhất của bạn."}, "Хошимин, премиум:": {"en": "Ho Chi Minh City, premium:", "vi": "TP. Hồ Chí Minh, cao cấp:"}, "TKT Clean, Ayasan, ZenHome24h. «Японский стандарт», для иностранцев и бизнеса.": {"en": "TKT Clean, Ayasan, ZenHome24h. “Japanese standard”, for foreigners and businesses.", "vi": "TKT Clean, Ayasan, ZenHome24h. “Tiêu chuẩn Nhật Bản”, cho người nước ngoài và doanh nghiệp."}, "Корпоративный (B2B):": {"en": "Corporate (B2B):", "vi": "Doanh nghiệp (B2B):"}, "AGS Vietnam — сертификация ISO, офисы и здания.": {"en": "AGS Vietnam — ISO certification, offices and buildings.", "vi": "AGS Vietnam — chứng nhận ISO, văn phòng và tòa nhà."}, "Ваши конкуренты / похожие сервисы": {"en": "Your competitors / similar services", "vi": "Đối thủ / dịch vụ tương tự của bạn"}, "Что у них сделано хорошо (что перенять)": {"en": "What they do well (what to adopt)", "vi": "Họ làm tốt điều gì (nên học hỏi)"}, "Чего им не хватает (ваша возможность)": {"en": "What they lack (your opportunity)", "vi": "Họ thiếu điều gì (cơ hội của bạn)"}, "Позиционирование и отличия": {"en": "Positioning and differentiation", "vi": "Định vị và khác biệt"}, "Чем хотите отличаться": {"en": "How you want to stand out", "vi": "Bạn muốn nổi bật ở điểm nào"}, "— выберите 1–2 главных": {"en": "— choose 1–2 main ones", "vi": "— chọn 1–2 điểm chính"}, "Цена": {"en": "Price", "vi": "Giá"}, "Качество / гарантия результата": {"en": "Quality / result guarantee", "vi": "Chất lượng / bảo hành kết quả"}, "Скорость / пунктуальность": {"en": "Speed / punctuality", "vi": "Tốc độ / đúng giờ"}, "Сервис и забота": {"en": "Service and care", "vi": "Dịch vụ và sự chu đáo"}, "Опыт / проверенный персонал": {"en": "Experience / vetted staff", "vi": "Kinh nghiệm / nhân viên đã kiểm tra"}, "Англоязычная поддержка": {"en": "English-speaking support", "vi": "Hỗ trợ bằng tiếng Anh"}, "Эко / безопасная химия": {"en": "Eco / safe chemicals", "vi": "Eco / hóa chất an toàn"}, "Одно предложение-позиционирование (за что вас выбирают)": {"en": "One positioning sentence (why people choose you)", "vi": "Một câu định vị (vì sao khách chọn bạn)"}, "Пример: «Англоязычный клининг в Дананге с проверенным персоналом и фиксированной ценой — без сюрпризов».": {"en": "Example: “English-speaking cleaning in Da Nang with vetted staff and fixed prices — no surprises.”", "vi": "Ví dụ: “Dịch vụ vệ sinh nói tiếng Anh tại Đà Nẵng với nhân viên đã kiểm tra và giá cố định — không bất ngờ.”"}, "Главные страхи / возражения клиента, которые надо снять": {"en": "Main customer fears / objections to address", "vi": "Nỗi lo / phản đối chính của khách cần giải tỏa"}, "Во Вьетнаме это обычно: чужие люди в доме (безопасность), языковой барьер, непрозрачная цена, не придут вовремя, плохо уберут.": {"en": "In Vietnam these are usually: strangers in the home (safety), language barrier, unclear pricing, not arriving on time, poor cleaning.", "vi": "Ở Việt Nam thường là: người lạ vào nhà (an toàn), rào cản ngôn ngữ, giá không rõ ràng, không đúng giờ, dọn không sạch."}, "Цены и предложение": {"en": "Pricing and offer", "vi": "Giá và ưu đãi"}, "Модель ценообразования": {"en": "Pricing model", "vi": "Mô hình giá"}, "За час": {"en": "Per hour", "vi": "Theo giờ"}, "За визит": {"en": "Per visit", "vi": "Theo lần"}, "За объект / пакет": {"en": "Per property / package", "vi": "Theo căn / gói"}, "За м² / окно / единицу": {"en": "Per m² / window / unit", "vi": "Theo m² / cửa sổ / đơn vị"}, "Фикс-пакеты (Basic / Standard / Deep)": {"en": "Fixed packages (Basic / Standard / Deep)", "vi": "Gói cố định (Basic / Standard / Deep)"}, "Валюта на сайте": {"en": "Currency on the site", "vi": "Tiền tệ trên web"}, "₫ (VND) — для местных": {"en": "₫ (VND) — for locals", "vi": "₫ (VND) — cho người địa phương"}, "$ (USD) — для иностранцев": {"en": "$ (USD) — for foreigners", "vi": "$ (USD) — cho người nước ngoài"}, "£ (GBP) — фунты": {"en": "£ (GBP) — pounds", "vi": "£ (GBP) — bảng Anh"}, "€ (EUR) — евро": {"en": "€ (EUR) — euros", "vi": "€ (EUR) — euro"}, "Несколько (переключение по языку)": {"en": "Several (switch by language)", "vi": "Nhiều loại (đổi theo ngôn ngữ)"}, "Показывать ли цены на сайте": {"en": "Show prices on the site?", "vi": "Có hiển thị giá trên web không"}, "Да, полностью (повышает доверие у иностранцев)": {"en": "Yes, fully (builds trust with foreigners)", "vi": "Có, đầy đủ (tăng uy tín với người nước ngoài)"}, "Частично («from … ₫ / from $…»)": {"en": "Partly (“from … ₫ / from $…”)", "vi": "Một phần (“from … ₫ / from $…”)"}, "Нет (только заявка / расчёт)": {"en": "No (request / quote only)", "vi": "Không (chỉ yêu cầu / báo giá)"}, "Способы оплаты": {"en": "Payment methods", "vi": "Phương thức thanh toán"}, "— местные ждут привычные": {"en": "— locals expect the usual ones", "vi": "— người địa phương mong các cách quen thuộc"}, "Наличные": {"en": "Cash", "vi": "Tiền mặt"}, "Банковский перевод / QR": {"en": "Bank transfer / QR", "vi": "Chuyển khoản / QR"}, "Карта / USD (иностранцы)": {"en": "Card / USD (foreigners)", "vi": "Thẻ / USD (người nước ngoài)"}, "Предоплата или постоплата": {"en": "Prepayment or postpayment", "vi": "Trả trước hay trả sau"}, "Акция для новых клиентов": {"en": "Offer for new customers", "vi": "Ưu đãi cho khách mới"}, "Доверие и легализация": {"en": "Trust and legal status", "vi": "Uy tín và pháp lý"}, "Ключевой блок для Вьетнама: клиент пускает незнакомых людей в дом. Чем сильнее доверие — тем выше конверсия и чек.": {"en": "A key block for Vietnam: the client lets strangers into their home. The more trust, the higher the conversion and the bill.", "vi": "Phần quan trọng tại Việt Nam: khách cho người lạ vào nhà. Càng nhiều uy tín, tỷ lệ chuyển đổi và đơn giá càng cao."}, "Юридический статус": {"en": "Legal status", "vi": "Tình trạng pháp lý"}, "№ лицензии / регистрации бизнеса": {"en": "License / business registration no.", "vi": "Số giấy phép / đăng ký kinh doanh"}, "Налоговый код": {"en": "Tax code", "vi": "Mã số thuế"}, "Сигналы доверия, которые можно показать": {"en": "Trust signals you can show", "vi": "Các tín hiệu uy tín có thể thể hiện"}, "Договор с клиентом": {"en": "Customer contract", "vi": "Hợp đồng với khách"}, "Ответственность за ущерб / порчу": {"en": "Liability for damage", "vi": "Chịu trách nhiệm về hư hỏng/mất mát"}, "Гарантия (бесплатная переуборка)": {"en": "Guarantee (free re-clean)", "vi": "Bảo hành (dọn lại miễn phí)"}, "Проверка персонала / документы": {"en": "Staff vetting / documents", "vi": "Kiểm tra nhân viên / giấy tờ"}, "Обучение / стандарты уборки": {"en": "Training / cleaning standards", "vi": "Đào tạo / tiêu chuẩn vệ sinh"}, "Страховка": {"en": "Insurance", "vi": "Bảo hiểm"}, "Фото и имена команды": {"en": "Team photos and names", "vi": "Ảnh và tên đội ngũ"}, "Отзывы (Google / FB / Zalo)": {"en": "Reviews (Google / FB / Zalo)", "vi": "Đánh giá (Google / FB / Zalo)"}, "Кол-во заказов / лет на рынке": {"en": "Number of orders / years on the market", "vi": "Số đơn / số năm hoạt động"}, "Гарантия одной фразой": {"en": "Guarantee in one sentence", "vi": "Cam kết trong một câu"}, "Заявки и операционка": {"en": "Requests and operations", "vi": "Yêu cầu và vận hành"}, "Как клиенты записываются": {"en": "How customers book", "vi": "Khách đặt lịch thế nào"}, "— во Вьетнаме Zalo, не WhatsApp": {"en": "— in Vietnam it's Zalo, not WhatsApp", "vi": "— ở Việt Nam dùng Zalo, không phải WhatsApp"}, "Телефон (click-to-call)": {"en": "Phone (click-to-call)", "vi": "Điện thoại (click-to-call)"}, "Форма на сайте": {"en": "Form on the site", "vi": "Biểu mẫu trên web"}, "WhatsApp / Telegram (иностранцы)": {"en": "WhatsApp / Telegram (foreigners)", "vi": "WhatsApp / Telegram (người nước ngoài)"}, "Онлайн-бронирование (дата/время)": {"en": "Online booking (date/time)", "vi": "Đặt lịch online (ngày/giờ)"}, "Email для заявок": {"en": "Email for requests", "vi": "Email nhận yêu cầu"}, "Zalo / телефон": {"en": "Zalo / phone", "vi": "Zalo / điện thoại"}, "Куда ещё (CRM / Sheet / бот)": {"en": "Where else (CRM / Sheet / bot)", "vi": "Nơi khác (CRM / Sheet / bot)"}, "Часы работы / время ответа": {"en": "Working hours / response time", "vi": "Giờ làm việc / thời gian phản hồi"}, "Бренд и дизайн": {"en": "Brand and design", "vi": "Thương hiệu và thiết kế"}, "Логотип": {"en": "Logo", "vi": "Logo"}, "Есть (приложу файл)": {"en": "Have one (will attach a file)", "vi": "Đã có (sẽ gửi file)"}, "Нужен новый": {"en": "Need a new one", "vi": "Cần làm mới"}, "Пока не важно": {"en": "Not important yet", "vi": "Chưa quan trọng"}, "Общий стиль": {"en": "Overall style", "vi": "Phong cách chung"}, "Минимализм / воздушно": {"en": "Minimalist / airy", "vi": "Tối giản / thoáng"}, "Классический / строгий": {"en": "Classic / formal", "vi": "Cổ điển / nghiêm túc"}, "Современный / дружелюбный": {"en": "Modern / friendly", "vi": "Hiện đại / thân thiện"}, "Премиальный / high-end": {"en": "Premium / high-end", "vi": "Cao cấp / high-end"}, "Ещё в стадии продумывания": {"en": "Still thinking it over", "vi": "Vẫn đang cân nhắc"}, "Настроение бренда (3–5 слов)": {"en": "Brand mood (3–5 words)", "vi": "Cảm xúc thương hiệu (3–5 từ)"}, "Цветовая палитра — выберите направление": {"en": "Colour palette — choose a direction", "vi": "Bảng màu — chọn hướng"}, "Какие цвета в тренде в 2026 году:": {"en": "Which colours are trending in 2026:", "vi": "Màu nào đang là xu hướng 2026:"}, "Синий и сине-зелёный": {"en": "Blue and blue-green", "vi": "Xanh dương và xanh lục lam"}, "— главный тренд года (по данным Etsy, Pinterest, WGSN). Это варианты D, E, G, H, I.": {"en": "— the main trend of the year (per Etsy, Pinterest, WGSN). These are options D, E, G, H, I.", "vi": "— xu hướng chính của năm (theo Etsy, Pinterest, WGSN). Là các phương án D, E, G, H, I."}, "Зелёный": {"en": "Green", "vi": "Xanh lá"}, "— читается как «эко» и «чистота», хорошо подходит клинингу. Варианты B, J, K.": {"en": "— reads as “eco” and “clean”, a good fit for cleaning. Options B, J, K.", "vi": "— gợi cảm giác “eco” và “sạch”, phù hợp dịch vụ vệ sinh. Phương án B, J, K."}, "Тёплые и нейтральные": {"en": "Warm and neutral", "vi": "Ấm và trung tính"}, "— спокойно и дорого. Варианты A, F, L.": {"en": "— calm and premium. Options A, F, L.", "vi": "— nhẹ nhàng và sang trọng. Phương án A, F, L."}, "Совет: светлый цвет лучше сочетать с одним глубоким, иначе он теряется на белом фоне. Сейчас страница оформлена в варианте": {"en": "Tip: a light colour works best paired with one deep colour, otherwise it gets lost on a white background. The page is currently in option", "vi": "Mẹo: màu nhạt nên kết hợp với một màu đậm, nếu không sẽ bị chìm trên nền trắng. Trang hiện dùng phương án"}, "· премиум, под иностранцев": {"en": "· premium, for foreigners", "vi": "· cao cấp, cho người nước ngoài"}, "· эко / безопасная химия": {"en": "· eco / safe chemicals", "vi": "· eco / hóa chất an toàn"}, "· дружелюбный масс-маркет": {"en": "· friendly mass-market", "vi": "· đại chúng thân thiện"}, "· классический синий, доверие": {"en": "· classic blue, trust", "vi": "· xanh cổ điển, uy tín"}, "· синий тренда 2026, свежий": {"en": "· 2026 trend blue, fresh", "vi": "· xanh xu hướng 2026, tươi mới"}, "· новинка 2026: quiet luxury + Damson": {"en": "· new for 2026: quiet luxury + Damson", "vi": "· mới 2026: quiet luxury + Damson"}, "· Pinterest 2026: ледяной + глубокий анкор": {"en": "· Pinterest 2026: icy + deep anchor", "vi": "· Pinterest 2026: băng giá + neo đậm"}, "· смелый кобальт 2026 (ColorArchive)": {"en": "· bold cobalt 2026 (ColorArchive)", "vi": "· cobalt táo bạo 2026 (ColorArchive)"}, "· WGSN 2026: спокойный дымчатый синий": {"en": "· WGSN 2026: calm smoky blue", "vi": "· WGSN 2026: xanh khói nhẹ nhàng"}, "· Pinterest Jade 2026, эко-зелёный": {"en": "· Pinterest Jade 2026, eco green", "vi": "· Pinterest Jade 2026, xanh lá eco"}, "· цвет года WGSN 2026, сине-зелёный": {"en": "· WGSN 2026 colour of the year, blue-green", "vi": "· màu của năm WGSN 2026, xanh lam-lục"}, "· тёплая земля/терракота, тренд 2026": {"en": "· warm earth/terracotta, 2026 trend", "vi": "· đất ấm/terracotta, xu hướng 2026"}, "Свой вариант / фирменные цвета": {"en": "Your own option / brand colours", "vi": "Phương án riêng / màu thương hiệu"}, "Стиль фото / видео": {"en": "Photo / video style", "vi": "Phong cách ảnh / video"}, "Тёплый свет и реальные люди/команда работают лучше холодных «синих» стоков.": {"en": "Warm light and real people/team work better than cold “blue” stock photos.", "vi": "Ánh sáng ấm và người thật/đội ngũ thật tốt hơn ảnh stock “xanh” lạnh."}, "Что в дизайне точно НЕ нравится": {"en": "What you definitely DON'T like in design", "vi": "Điều bạn chắc chắn KHÔNG thích trong thiết kế"}, "Сайты-референсы (2–3 ссылки + чем нравятся)": {"en": "Reference sites (2–3 links + why you like them)", "vi": "Website tham khảo (2–3 link + lý do thích)"}, "Тексты и тон": {"en": "Copy and tone", "vi": "Nội dung và giọng điệu"}, "Кто готовит тексты": {"en": "Who prepares the copy", "vi": "Ai chuẩn bị nội dung"}, "Клиент самостоятельно": {"en": "The client themselves", "vi": "Khách tự làm"}, "Разработчик (AI-assisted), клиент проверяет": {"en": "Developer (AI-assisted), client reviews", "vi": "Lập trình viên (có AI hỗ trợ), khách duyệt"}, "Тон коммуникации": {"en": "Communication tone", "vi": "Giọng điệu giao tiếp"}, "Строгий / профессиональный": {"en": "Formal / professional", "vi": "Nghiêm túc / chuyên nghiệp"}, "Простой и дружелюбный": {"en": "Simple and friendly", "vi": "Đơn giản và thân thiện"}, "Премиальный / забота": {"en": "Premium / caring", "vi": "Cao cấp / chu đáo"}, "Тон для EN (иностранцы)": {"en": "Tone for EN (foreigners)", "vi": "Giọng điệu cho EN (người nước ngoài)"}, "Тон для VI (местные)": {"en": "Tone for VI (locals)", "vi": "Giọng điệu cho VI (người địa phương)"}, "Структура сайта": {"en": "Site structure", "vi": "Cấu trúc website"}, "Формат": {"en": "Format", "vi": "Định dạng"}, "Лендинг (1 страница)": {"en": "Landing page (1 page)", "vi": "Landing page (1 trang)"}, "Многостраничный сайт": {"en": "Multi-page site", "vi": "Website nhiều trang"}, "Нужные блоки / страницы": {"en": "Required blocks / pages", "vi": "Khối / trang cần có"}, "Hero (заглавный экран + CTA)": {"en": "Hero (main screen + CTA)", "vi": "Hero (màn hình chính + CTA)"}, "Почему мы / доверие": {"en": "Why us / trust", "vi": "Vì sao chọn chúng tôi / uy tín"}, "Как это работает (3 шага)": {"en": "How it works (3 steps)", "vi": "Cách hoạt động (3 bước)"}, "Цены / пакеты": {"en": "Prices / packages", "vi": "Giá / gói"}, "Отзывы": {"en": "Reviews", "vi": "Đánh giá"}, "Галерея «до/после»": {"en": "Before/after gallery", "vi": "Thư viện trước/sau"}, "Зона обслуживания / карта": {"en": "Service area / map", "vi": "Khu vực phục vụ / bản đồ"}, "О нас / команда": {"en": "About us / team", "vi": "Về chúng tôi / đội ngũ"}, "Контакты + форма": {"en": "Contacts + form", "vi": "Liên hệ + biểu mẫu"}, "Блог / SEO-страницы по районам": {"en": "Blog / SEO pages by district", "vi": "Blog / trang SEO theo quận"}, "Другие блоки / страницы — впишите свои": {"en": "Other blocks / pages — add your own", "vi": "Khối / trang khác — tự thêm"}, "Чего нет в списке выше: например, «Сертификаты», «Вакансии», «Калькулятор», «Подписка на уборку».": {"en": "Anything not in the list above: e.g. “Certificates”, “Careers”, “Calculator”, “Cleaning subscription”.", "vi": "Những gì chưa có ở trên: ví dụ “Chứng nhận”, “Tuyển dụng”, “Máy tính giá”, “Gói định kỳ”."}, "Приоритет / порядок блоков (если лендинг)": {"en": "Priority / order of blocks (if landing page)", "vi": "Ưu tiên / thứ tự khối (nếu landing)"}, "Функционал": {"en": "Functionality", "vi": "Tính năng"}, "Форма заявки": {"en": "Request form", "vi": "Biểu mẫu yêu cầu"}, "Плавающая кнопка Zalo": {"en": "Floating Zalo button", "vi": "Nút Zalo nổi"}, "Калькулятор стоимости": {"en": "Price calculator", "vi": "Máy tính chi phí"}, "Онлайн-календарь записи": {"en": "Online booking calendar", "vi": "Lịch đặt online"}, "Отзывы (Google / FB embed)": {"en": "Reviews (Google / FB embed)", "vi": "Đánh giá (nhúng Google / FB)"}, "Карта зоны обслуживания": {"en": "Service area map", "vi": "Bản đồ khu vực phục vụ"}, "Переключатель языка EN / VI": {"en": "Language switcher EN / VI", "vi": "Chuyển ngôn ngữ EN / VI"}, "Язык и SEO-каналы": {"en": "Language and SEO channels", "vi": "Ngôn ngữ và kênh SEO"}, "Языки сайта": {"en": "Site languages", "vi": "Ngôn ngữ website"}, "Откуда планируете трафик": {"en": "Where you plan to get traffic", "vi": "Nguồn traffic dự kiến"}, "Google / Google Maps (локальный SEO)": {"en": "Google / Google Maps (local SEO)", "vi": "Google / Google Maps (SEO địa phương)"}, "Facebook-группы иностранцев": {"en": "Foreigner Facebook groups", "vi": "Nhóm Facebook người nước ngoài"}, "Facebook Page / реклама": {"en": "Facebook Page / ads", "vi": "Facebook Page / quảng cáo"}, "Сарафан / рекомендации": {"en": "Word of mouth / referrals", "vi": "Truyền miệng / giới thiệu"}, "Контент-актив (что уже есть)": {"en": "Content assets (what you already have)", "vi": "Tài nguyên nội dung (đã có)"}, "Фото реальных работ": {"en": "Photos of real work", "vi": "Ảnh công việc thực tế"}, "Фото «до/после»": {"en": "Before/after photos", "vi": "Ảnh trước/sau"}, "Фото команды": {"en": "Team photos", "vi": "Ảnh đội ngũ"}, "Видео процесса": {"en": "Process videos", "vi": "Video quy trình làm việc"}, "Отзывы клиентов": {"en": "Customer reviews", "vi": "Đánh giá của khách"}, "Существующие профили и ссылки": {"en": "Existing profiles and links", "vi": "Hồ sơ và liên kết hiện có"}, "Сроки и дополнительно": {"en": "Timeline and extras", "vi": "Thời hạn và bổ sung"}, "Желаемые сроки запуска": {"en": "Desired launch timeline", "vi": "Thời điểm ra mắt mong muốn"}, "Бюджет (если есть ориентир)": {"en": "Budget (if you have a rough figure)", "vi": "Ngân sách (nếu có)"}, "Любая дополнительная информация": {"en": "Any additional information", "vi": "Thông tin bổ sung"}, "Готово? Нажмите": {"en": "Done? Click", "vi": "Xong? Nhấn"}, "«Печать / PDF»": {"en": "“Print / PDF”", "vi": "“In / PDF”"}, "вверху, чтобы сохранить заполненный бриф и переслать ДимеФ.": {"en": "at the top to save the completed brief and send it to DimaF.", "vi": "ở trên để lưu bản brief đã điền và gửi cho DimaF."}, "Бриф · клининговый сервис · Вьетнам · палитра Cool Blue 2026": {"en": "Brief · cleaning service · Vietnam · Cool Blue 2026 palette", "vi": "Brief · dịch vụ vệ sinh · Việt Nam · bảng màu Cool Blue 2026"}, "Техническое и запуск": {"en": "Technical and launch", "vi": "Kỹ thuật và ra mắt"}, "Как сайт будет работать после запуска: оплата, заявки, аналитика, обновление контента.": {"en": "How the site will work after launch: payment, requests, analytics, content updates.", "vi": "Cách website hoạt động sau khi ra mắt: thanh toán, yêu cầu, phân tích, cập nhật nội dung."}, "Оплата на сайте": {"en": "Payment on the site", "vi": "Thanh toán trên web"}, "Как принимаете оплату на сайте": {"en": "How you take payment on the site", "vi": "Cách nhận thanh toán trên web"}, "Только заявка (оплата при встрече / переводом вручную)": {"en": "Request only (pay on site / manual transfer)", "vi": "Chỉ gửi yêu cầu (trả khi gặp / chuyển khoản thủ công)"}, "Онлайн-оплата на сайте (платёжный шлюз)": {"en": "Online payment on the site (payment gateway)", "vi": "Thanh toán online trên web (cổng thanh toán)"}, "Заявки: куда уходят и оповещения": {"en": "Requests: routing and notifications", "vi": "Yêu cầu: nơi nhận và thông báo"}, "Куда должны приходить заявки": {"en": "Where requests should go", "vi": "Yêu cầu sẽ được gửi đến đâu"}, "CRM / Google Sheet": {"en": "CRM / Google Sheet", "vi": "CRM / Google Sheet"}, "Email-оповещения": {"en": "Email notifications", "vi": "Thông báo qua email"}, "Письмо бизнесу о новой заявке": {"en": "Email to the business about a new request", "vi": "Email cho doanh nghiệp khi có yêu cầu mới"}, "Авто-письмо «Спасибо» клиенту": {"en": "Automatic “Thank you” email to the customer", "vi": "Email “Cảm ơn” tự động cho khách"}, "Где отслеживать заявки": {"en": "Where to track requests", "vi": "Theo dõi yêu cầu ở đâu"}, "Например: общий ящик, Google-таблица, CRM, Telegram-чат.": {"en": "e.g. a shared inbox, a Google Sheet, a CRM, a Telegram chat.", "vi": "VD: hộp thư chung, Google Sheet, CRM, nhóm Telegram."}, "Аналитика": {"en": "Analytics", "vi": "Phân tích (Analytics)"}, "Аналитика — это счётчики, которые показывают, сколько людей зашло на сайт, откуда они пришли и сколько оставили заявок. Нужна, чтобы понимать, окупается ли реклама.": {"en": "Analytics are trackers that show how many people visited the site, where they came from, and how many left a request. It's needed to see whether your ads pay off.", "vi": "Analytics là công cụ đo lường cho biết bao nhiêu người vào web, đến từ đâu và bao nhiêu người để lại yêu cầu. Cần để biết quảng cáo có hiệu quả không."}, "Google Analytics (GA4) — статистика посещений": {"en": "Google Analytics (GA4) — visit statistics", "vi": "Google Analytics (GA4) — thống kê lượt truy cập"}, "Google Tag Manager — управление счётчиками": {"en": "Google Tag Manager — manage trackers", "vi": "Google Tag Manager — quản lý mã đo lường"}, "Meta Pixel (Facebook) — для рекламы в FB/Instagram": {"en": "Meta Pixel (Facebook) — for FB/Instagram ads", "vi": "Meta Pixel (Facebook) — cho quảng cáo FB/Instagram"}, "Google Search Console — позиции в поиске": {"en": "Google Search Console — search rankings", "vi": "Google Search Console — thứ hạng tìm kiếm"}, "Пока не нужно": {"en": "Not needed yet", "vi": "Chưa cần"}, "Уже есть аккаунты Google / Meta?": {"en": "Do you already have Google / Meta accounts?", "vi": "Bạn đã có tài khoản Google / Meta chưa?"}, "Да": {"en": "Yes", "vi": "Có"}, "Нет": {"en": "No", "vi": "Không"}, "Не знаю": {"en": "Don't know", "vi": "Không biết"}, "Обновление контента": {"en": "Content updates", "vi": "Cập nhật nội dung"}, "Как планируете обновлять тексты, фото, цены": {"en": "How you plan to update text, photos, prices", "vi": "Bạn dự định cập nhật chữ, ảnh, giá thế nào"}, "От этого зависит, нужна ли админка (CMS) или хватит статики.": {"en": "This determines whether you need an admin panel (CMS) or static pages are enough.", "vi": "Điều này quyết định bạn cần trang quản trị (CMS) hay chỉ cần trang tĩnh."}, "Достаточно статики — правки делает разработчик / ИИ-агент по запросу": {"en": "Static is enough — a developer / AI agent makes edits on request", "vi": "Trang tĩnh là đủ — lập trình viên / AI agent chỉnh sửa khi cần"}, "Нужна простая админка (CMS), чтобы менять самому": {"en": "Need a simple admin panel (CMS) to edit myself", "vi": "Cần trang quản trị đơn giản (CMS) để tự sửa"}, "Редко меняется — пока не важно": {"en": "Changes rarely — not important yet", "vi": "Hiếm khi thay đổi — chưa quan trọng"}, "Кто будет обновлять после запуска": {"en": "Who will update it after launch", "vi": "Ai sẽ cập nhật sau khi ra mắt"}};
+  var PH = {"Дананг / Хошимин / Ханой / Нячанг": {"en": "Da Nang / Ho Chi Minh / Hanoi / Nha Trang", "vi": "Đà Nẵng / TP.HCM / Hà Nội / Nha Trang"}, "Например: район Хайчау, Дананг": {"en": "e.g. Hai Chau district, Da Nang", "vi": "VD: quận Hải Châu, Đà Nẵng"}, "напр. 30–50": {"en": "e.g. 30–50", "vi": "VD: 30–50"}, "ориентир лендинга 3–7%": {"en": "landing benchmark 3–7%", "vi": "tham chiếu landing 3–7%"}, "напр. до 15 минут": {"en": "e.g. within 15 minutes", "vi": "VD: trong 15 phút"}, "напр. −20% на первый заказ": {"en": "e.g. −20% on first order", "vi": "VD: −20% cho đơn đầu"}, "чисто, спокойно, надёжно, свежо, забота": {"en": "clean, calm, reliable, fresh, caring", "vi": "sạch, yên, tin cậy, tươi mới, chu đáo"}, "Например: страница «Сертификаты», блок «Наша команда»…": {"en": "e.g. “Certificates” page, “Our team” block…", "vi": "VD: trang “Chứng nhận”, khối “Đội ngũ”…"}};
+  var META = {
+    ru:{flag:"🇷🇺",name:"Русский"},
+    en:{flag:"🇬🇧",name:"English"},
+    vi:{flag:"🇻🇳",name:"Tiếng Việt"}
+  };
+  var nodes = [];
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  while (walker.nextNode()) {
+    var n = walker.currentNode;
+    var pn = n.parentNode ? n.parentNode.nodeName : '';
+    if (pn === 'SCRIPT' || pn === 'STYLE') continue;
+    if (!n.textContent || !n.textContent.trim()) continue;
+    n.__ru = n.textContent;
+    nodes.push(n);
+  }
+  var phEls = Array.prototype.slice.call(document.querySelectorAll('[placeholder]'));
+  phEls.forEach(function(el){ el.__ph = el.getAttribute('placeholder'); });
+
+  function apply(lang){
+    nodes.forEach(function(n){
+      var orig = n.__ru;
+      if (lang === 'ru') { n.textContent = orig; return; }
+      var key = orig.trim();
+      var tr = T[key];
+      if (tr && tr[lang]) {
+        var lead = orig.match(/^\s*/)[0];
+        var trail = orig.match(/\s*$/)[0];
+        n.textContent = lead + tr[lang] + trail;
+      }
+    });
+    phEls.forEach(function(el){
+      var o = el.__ph;
+      if (lang === 'ru') { el.setAttribute('placeholder', o); return; }
+      var tr = PH[o];
+      if (tr && tr[lang]) el.setAttribute('placeholder', tr[lang]);
+    });
+    document.documentElement.lang = lang;
+    var sel = document.getElementById('langsel');
+    sel.querySelector('[data-flag]').textContent = META[lang].flag;
+    sel.querySelector('[data-lname]').textContent = META[lang].name;
+    sel.querySelectorAll('.langmenu li').forEach(function(li){
+      li.setAttribute('aria-selected', li.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+  }
+
+  var sel = document.getElementById('langsel');
+  var btn = sel.querySelector('.langbtn');
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = sel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sel.querySelectorAll('.langmenu li').forEach(function(li){
+    li.addEventListener('click', function(){
+      apply(li.getAttribute('data-lang'));
+      sel.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click', function(){ sel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+})();
+</script>
+
+<script>
+(function(){
+  console.log('BRIEF BUILD #5 — после отправки: шапка + «Спасибо» + подвал, форма скрыта');
+  var SUPABASE_URL = 'https://qhthqcrmpphlctlohvez.supabase.co';
+  var SUPABASE_ANON_KEY = 'sb_publishable_Fg4PsbCfYbgdq9mcNkdyKQ_7SpkhHVU';
+  // ============================================================
+
+  var supabaseClient = null;
+  if (window.supabase && SUPABASE_URL.indexOf('ВСТАВЬТЕ') === -1 && SUPABASE_ANON_KEY.indexOf('ВСТАВЬТЕ') === -1) {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+
+  // ---------- Тексты на 3 языках (не зависят от TreeWalker-снапшота) ----------
+  var MSG = {
+    submit: { ru: 'Отправить бриф', en: 'Submit brief', vi: 'Gửi bản brief' },
+    sending: { ru: 'Отправка…', en: 'Sending…', vi: 'Đang gửi…' },
+    fillRequired: {
+      ru: 'Пожалуйста, заполните все обязательные поля (отмечены звёздочкой).',
+      en: 'Please fill in all required fields (marked with an asterisk).',
+      vi: 'Vui lòng điền đầy đủ các trường bắt buộc (có dấu *).'
+    },
+    invalidEmail: {
+      ru: 'Проверьте email для заявок — формат выглядит некорректным.',
+      en: 'Please check the request email — the format looks incorrect.',
+      vi: 'Vui lòng kiểm tra email nhận yêu cầu — định dạng có vẻ không đúng.'
+    },
+    networkError: {
+      ru: 'Не удалось отправить бриф. Проверьте интернет и попробуйте снова — или сохраните бриф в PDF кнопкой ниже и пришлите на email senkoner4@gmail.com или в WhatsApp.',
+      en: 'Could not submit the brief. Check your connection and try again — or save the brief as PDF using the button below and send it to senkoner4@gmail.com or via WhatsApp.',
+      vi: 'Không thể gửi bản brief. Kiểm tra kết nối và thử lại — hoặc lưu bản brief thành PDF bằng nút bên dưới và gửi tới senkoner4@gmail.com hoặc qua WhatsApp.'
+    },
+    notConfigured: {
+      ru: 'Форма пока не подключена к серверу. Сохраните бриф в PDF кнопкой ниже и пришлите на email senkoner4@gmail.com или в WhatsApp.',
+      en: 'The form is not connected to the server yet. Save the brief as PDF using the button below and send it to senkoner4@gmail.com or via WhatsApp.',
+      vi: 'Biểu mẫu chưa được kết nối với máy chủ. Lưu bản brief thành PDF bằng nút bên dưới và gửi tới senkoner4@gmail.com hoặc qua WhatsApp.'
+    },
+    savePdf: { ru: 'Сохранить как PDF', en: 'Save as PDF', vi: 'Lưu thành PDF' },
+    thankyouTitle: { ru: 'Спасибо!', en: 'Thank you!', vi: 'Cảm ơn bạn!' },
+    thankyouText: {
+      ru: 'Я внимательно изучу ваш бриф и свяжусь с вами в ближайшее время.',
+      en: 'I will carefully review your brief and get back to you shortly.',
+      vi: 'Tôi sẽ xem kỹ bản brief của bạn và liên hệ lại trong thời gian sớm nhất.'
+    },
+    thankyouId: { ru: 'Номер заявки: ', en: 'Submission ID: ', vi: 'Mã yêu cầu: ' },
+    chooseOne: { ru: 'Выберите хотя бы один вариант.', en: 'Please select at least one option.', vi: 'Vui lòng chọn ít nhất một phương án.' },
+    note: { ru: 'Готово? Нажмите кнопку, чтобы отправить бриф.', en: 'Done? Click the button to submit the brief.', vi: 'Xong? Nhấn nút để gửi bản brief.' }
+  };
+
+  function curLang(){
+    var l = document.documentElement.lang;
+    return (l === 'en' || l === 'vi') ? l : 'ru';
+  }
+
+  var form = document.getElementById('briefForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var submitError = document.getElementById('submitError');
+  var savePdfBtn = document.getElementById('savePdfBtn');
+  var thankyou = document.getElementById('thankyou');
+
+  // Запасной путь: если бриф не отправился — сохранить его как PDF (печать в файл)
+  if (savePdfBtn) savePdfBtn.addEventListener('click', function(){ window.print(); });
+
+  // Обновляем текст кнопки при смене языка (перехватываем клики langmenu)
+  function refreshTexts(){
+    if (submitBtn && !submitBtn.disabled) submitBtn.textContent = MSG.submit[curLang()];
+    var note = document.getElementById('submitNoteText');
+    if (note) note.textContent = MSG.note[curLang()];
+    if (savePdfBtn) savePdfBtn.textContent = MSG.savePdf[curLang()];
+  }
+  document.querySelectorAll('.langmenu li').forEach(function(li){
+    li.addEventListener('click', function(){ setTimeout(refreshTexts, 0); });
+  });
+  refreshTexts();
+
+  // ---------- Обязательные поля ----------
+  var REQUIRED_TEXT_IDS = [
+    'business_name', 'main_city', 'office_address', 'business_description',
+    'contact_email', 'contact_zalo_phone', 'site_languages'
+  ];
+  var REQUIRED_RADIO_GROUPS = ['goal', 'objtype', 'sitetype', 'prices', 'style', 'pay', 'cms', 'palette'];
+  var REQUIRED_CHECKBOX_GROUPS = [
+    'services', 'segments', 'currency', 'payment_methods',
+    'features', 'leads_destinations', 'email_notifications', 'analytics_tools'
+  ];
+
+  function isEmailValid(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function groupContainer(input){
+    return input.closest('.opts') || input.closest('.palette') || input.closest('.field') || input.parentNode;
+  }
+
+  function markGroupInvalid(container){
+    if (!container) return;
+    container.classList.add('invalid-group');
+    var next = container.nextElementSibling;
+    if (!next || !next.classList || !next.classList.contains('group-error')) {
+      var m = document.createElement('div');
+      m.className = 'group-error';
+      m.textContent = MSG.chooseOne[curLang()];
+      container.parentNode.insertBefore(m, container.nextSibling);
+    }
+  }
+
+  function clearGroup(container){
+    if (!container) return;
+    container.classList.remove('invalid-group');
+    var n = container.nextElementSibling;
+    if (n && n.classList && n.classList.contains('group-error')) n.parentNode.removeChild(n);
+  }
+
+  function clearInvalid(){
+    form.querySelectorAll('.invalid').forEach(function(el){ el.classList.remove('invalid'); });
+    form.querySelectorAll('.invalid-group').forEach(function(el){ el.classList.remove('invalid-group'); });
+    form.querySelectorAll('.group-error').forEach(function(el){ el.parentNode.removeChild(el); });
+  }
+
+  function validate(){
+    clearInvalid();
+    var firstInvalid = null;
+
+    REQUIRED_TEXT_IDS.forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var val = (el.value || '').trim();
+      var bad = !val;
+      if (id === 'contact_email' && val && !isEmailValid(val)) bad = true;
+      if (bad) {
+        el.classList.add('invalid');
+        if (!firstInvalid) firstInvalid = el;
+      }
+    });
+
+    REQUIRED_RADIO_GROUPS.forEach(function(name){
+      var radios = form.querySelectorAll('input[type="radio"][name="' + name + '"]');
+      if (!radios.length) return;
+      var checked = Array.prototype.some.call(radios, function(r){ return r.checked; });
+      if (!checked) {
+        markGroupInvalid(groupContainer(radios[0]));
+        if (!firstInvalid) firstInvalid = radios[0];
+      }
+    });
+
+    REQUIRED_CHECKBOX_GROUPS.forEach(function(name){
+      var boxes = form.querySelectorAll('input[type="checkbox"][name="' + name + '"]');
+      if (!boxes.length) return;
+      var checked = Array.prototype.some.call(boxes, function(c){ return c.checked; });
+      if (!checked) {
+        markGroupInvalid(groupContainer(boxes[0]));
+        if (!firstInvalid) firstInvalid = boxes[0];
+      }
+    });
+
+    return firstInvalid;
+  }
+
+  function maybeHideError(){
+    if (!form.querySelector('.invalid') && !form.querySelector('.invalid-group')) hideError();
+  }
+
+  // Динамически снимаем подсветку, как только поле/группа заполнены
+  form.addEventListener('input', function(e){
+    var t = e.target;
+    if (t && t.classList && t.classList.contains('invalid') &&
+        (t.tagName === 'TEXTAREA' || t.type === 'text' || t.type === 'email')) {
+      var v = (t.value || '').trim();
+      var ok = !!v && (t.id !== 'contact_email' || isEmailValid(v));
+      if (ok) t.classList.remove('invalid');
+    }
+    maybeHideError();
+  });
+  form.addEventListener('change', function(e){
+    var t = e.target;
+    if (t && t.name && (t.type === 'radio' || t.type === 'checkbox')) {
+      var group = form.querySelectorAll('input[name="' + t.name + '"]');
+      var checked = Array.prototype.some.call(group, function(x){ return x.checked; });
+      if (checked) clearGroup(groupContainer(t));
+    }
+    maybeHideError();
+  });
+
+  // ---------- Сбор payload ----------
+  function collectPayload(){
+    var payload = {};
+
+    // Все текстовые/email-поля и textarea с id внутри формы
+    form.querySelectorAll('input[type="text"][id], input[type="email"][id], textarea[id]').forEach(function(el){
+      payload[el.id] = el.value || '';
+    });
+
+    // Radio-группы (по уникальным name)
+    var radioNames = {};
+    form.querySelectorAll('input[type="radio"][name]').forEach(function(r){ radioNames[r.name] = true; });
+    Object.keys(radioNames).forEach(function(name){
+      var checked = form.querySelector('input[type="radio"][name="' + name + '"]:checked');
+      payload[name] = checked ? (checked.value || checked.id) : null;
+    });
+
+    // Checkbox-группы (по уникальным name) -> массив выбранных value
+    var checkboxNames = {};
+    form.querySelectorAll('input[type="checkbox"][name]').forEach(function(c){ checkboxNames[c.name] = true; });
+    Object.keys(checkboxNames).forEach(function(name){
+      var values = [];
+      form.querySelectorAll('input[type="checkbox"][name="' + name + '"]:checked').forEach(function(c){
+        values.push(c.value || c.id);
+      });
+      payload[name] = values;
+    });
+
+    payload.submitted_at = new Date().toISOString();
+    payload.page_lang = curLang();
+
+    return payload;
+  }
+
+  function showThankYou(submissionId){
+    var lang = curLang();
+    document.getElementById('thankyouTitle').textContent = MSG.thankyouTitle[lang];
+    document.getElementById('thankyouText').textContent = MSG.thankyouText[lang];
+    document.getElementById('thankyouId').textContent = submissionId ? (MSG.thankyouId[lang] + submissionId) : '';
+    // Контент формы лежит в <main>. Выносим блок «Спасибо» перед подвалом,
+    // показываем его и прячем весь <main>. Шапка и подвал остаются.
+    var footer = document.querySelector('footer');
+    if (footer) footer.before(thankyou);
+    thankyou.style.display = 'block';
+    var main = document.querySelector('main');
+    if (main) main.style.display = 'none';
+    window.scrollTo(0, 0);
+  }
+
+  function showError(text){
+    submitError.textContent = text;
+    submitError.style.display = 'block';
+  }
+
+  function hideError(){
+    submitError.style.display = 'none';
+    submitError.textContent = '';
+    if (savePdfBtn) savePdfBtn.style.display = 'none';
+  }
+
+  // Показать запасную кнопку «Сохранить как PDF» (только когда отправка не удалась)
+  function showSavePdf(){
+    if (savePdfBtn) {
+      savePdfBtn.disabled = false;
+      savePdfBtn.style.display = 'inline-block';
+    }
+  }
+
+  // Блокируем всю форму на время отправки — ничего нельзя менять
+  function setFormDisabled(state){
+    form.querySelectorAll('input, textarea, select, button').forEach(function(el){
+      el.disabled = state;
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      hideError();
+
+      var lang = curLang();
+      var firstInvalid = validate();
+      if (firstInvalid) {
+        var msg = MSG.fillRequired[lang];
+        var emailEl = document.getElementById('contact_email');
+        if (firstInvalid === emailEl && emailEl.value.trim() && !isEmailValid(emailEl.value.trim())) {
+          msg = MSG.invalidEmail[lang];
+        }
+        showError(msg);
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
+        return;
+      }
+
+      if (!supabaseClient) {
+        showError(MSG.notConfigured[lang]);
+        showSavePdf();
+        return;
+      }
+
+      var payload = collectPayload();
+
+      setFormDisabled(true);
+      submitBtn.textContent = MSG.sending[lang];
+
+      var settled = false;
+      var timer = null;
+
+      function onFail(){
+        if (settled) return;
+        settled = true;
+        if (timer) clearTimeout(timer);
+        setFormDisabled(false);            // снова можно редактировать
+        submitBtn.textContent = MSG.submit[lang]; // кнопка перестаёт быть «Отправка…»
+        showError(MSG.networkError[lang]);
+        showSavePdf();
+      }
+
+      function onSuccess(id){
+        if (settled) return;
+        settled = true;
+        if (timer) clearTimeout(timer);
+        showThankYou(id);                  // прячем форму, показываем блок «спасибо»
+      }
+
+      // Страховка: если ответа нет за 20 секунд — не оставляем «Отправка…» навсегда
+      timer = setTimeout(onFail, 20000);
+
+      try {
+        supabaseClient.rpc('submit_brief', { payload: payload }).then(function(res){
+          if (res && res.error) { onFail(); return; }
+          onSuccess(res ? res.data : null);
+        }).catch(onFail);
+      } catch (err) {
+        onFail();
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
